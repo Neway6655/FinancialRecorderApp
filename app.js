@@ -10,7 +10,6 @@ Ext.application({
     ],
 
 	models: ['Recorder'],
-	stores: ['RecorderLocal'],
 	controllers: ['Activity'],
 	views: ['ActivityMain', 'ActivityList', 'ActivityDetail', 'UserSelector'],
 	

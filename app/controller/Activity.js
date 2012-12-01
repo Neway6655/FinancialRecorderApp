@@ -1,6 +1,8 @@
 Ext.define('FinancialRecorderApp.controller.Activity', {
     extend: 'Ext.app.Controller',
 
+    requires: ['FinancialRecorderApp.store.UserStore'],
+
     launch: function () {
        this.callParent();
        console.log("financial record launch");
@@ -40,6 +42,11 @@ Ext.define('FinancialRecorderApp.controller.Activity', {
         if (!this.getActivityDetail()){
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
+
+        this.getUserSelector().setDisableSelection(false);
+        this.getUserSelector().deselectAll();
+        this.getActivityDetail().getSaveButton().show();
+        this.getActivityDetail().getForm().reset();
         Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);
     },
 
@@ -48,9 +55,22 @@ Ext.define('FinancialRecorderApp.controller.Activity', {
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
     		this.getActivityDetail().loadRecord(record);
-        // for (i=0; i < record.data.userNameList.length; i++){
-        //   this.getUserSelector().select(record.data.userNameList.length[i]);
-        // }
+        var userStore = this.getUserSelector().getStore();
+
+        for (i=0; i < record.data.userNameList.length; i++){
+          var user = userStore.queryBy(function(userRecord){
+              var userName = record.data.userNameList[i];
+              if (userName === userRecord.get('name')){
+                return true;
+              }
+            });
+          if(user){
+            this.getUserSelector().select(user.items[0], true);
+          }
+        }
+        
+        this.getUserSelector().setDisableSelection(true);
+        this.getActivityDetail().getSaveButton().hide();
         Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);
     },
 

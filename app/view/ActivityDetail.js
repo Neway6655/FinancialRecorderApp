@@ -14,6 +14,8 @@ Ext.define('FinancialRecorderApp.view.ActivityDetail', {
 
     totalFeeField: '',
 
+    saveButton: '',
+
 	initialize: function() {
 		console.log('init activity detail view.');
 
@@ -44,6 +46,15 @@ Ext.define('FinancialRecorderApp.view.ActivityDetail', {
 			}]
 		});
 
+		this.saveButton = Ext.create('Ext.Button', {
+			xtype: 'button',
+    		ui: 'action',
+    		align: 'right',
+    		text: 'Save',
+    		handler: this.save,
+    		scope: this
+		});
+
 		var topBar = {
     		xtype: 'titlebar',
     		docked: 'top',
@@ -55,14 +66,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetail', {
     			text: 'Back',
     			handler: this.back,
     			scope: this
-    		},{
-    			xtype: 'button',
-    			ui: 'action',
-    			align: 'right',
-    			text: 'Save',
-    			handler: this.save,
-    			scope: this
-    		}]
+    		}, this.saveButton]
     	};
 
     	userSelectorPanel = Ext.create('Ext.Panel', {
@@ -72,7 +76,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetail', {
             layout: {
                 type: 'fit',
             },
-            items: [{
+             items: [{
                 xtype: 'userselector',
             }],
         });
@@ -109,6 +113,9 @@ Ext.define('FinancialRecorderApp.view.ActivityDetail', {
 
 	getForm: function(){
 		return this.formPanel;
-	}
+	},
 
+	getSaveButton: function(){
+		return this.saveButton;
+	}
 });
