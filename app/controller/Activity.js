@@ -15,7 +15,7 @@ Ext.define('FinancialRecorderApp.controller.Activity', {
 
     config: {
         refs: {
-          main: 'mainpanel',
+          main: 'activitypanel',
     			activityList: 'activitylist',
     			activityDetail: 'activitydetail',
           userSelector: 'userselector',
@@ -105,5 +105,5 @@ Ext.define('FinancialRecorderApp.controller.Activity', {
             alert('Failed');
           }
         });
-    }
+    },
 });

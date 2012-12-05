@@ -1,6 +1,6 @@
 Ext.define('FinancialRecorderApp.view.ActivityMain', {
     extend: 'Ext.Panel',
-	xtype: 'mainpanel',
+	xtype: 'activitypanel',
 
 	requires: [
 		'FinancialRecorderApp.view.ActivityList'
@@ -16,6 +16,14 @@ Ext.define('FinancialRecorderApp.view.ActivityMain', {
             title: 'Activity List',
             docked: 'top',
             items: [{
+                xtype: 'button',
+                ui: 'back',
+                text: 'Back',
+                align: 'left',
+                handler: this.back,
+                scope: this
+            },
+            {
                 xtype: 'button',
                 ui: 'action',
                 text: 'New',
@@ -35,5 +43,10 @@ Ext.define('FinancialRecorderApp.view.ActivityMain', {
     create: function(){
         console.log('create an new record');
         this.fireEvent('showNewFinancialRecordEvent', this);
+    },
+
+    back: function(){
+        console.log('back to main view');
+        this.fireEvent('backToManViewEvent', this);
     },
 });
