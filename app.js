@@ -11,7 +11,7 @@ Ext.application({
 
 	models: ['RecorderModel'],
 	controllers: ['MainController','ActivityController'],
-	views: ['MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'UserSelectorView'],
+	views: ['MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'UserSelectorView', 'AccountView'],
 	
 	launch: function() {
         // Destroy the #appLoadingIndicator element
@@ -19,8 +19,11 @@ Ext.application({
 
         // Initialize the main view
         var mainView = Ext.create('FinancialRecorderApp.view.MainView');
-        var activityMainView = Ext.create('FinancialRecorderApp.view.ActivityView');
+        var activityView = Ext.create('FinancialRecorderApp.view.ActivityView');
         var activityDetailView = Ext.create('FinancialRecorderApp.view.ActivityDetailView');
-        Ext.Viewport.add(mainView, activityMainView, activityDetailView);
+        
+        var accountView = Ext.create('FinancialRecorderApp.view.AccountView');
+
+        Ext.Viewport.add(mainView, activityView, activityDetailView, accountView);
     }
 });

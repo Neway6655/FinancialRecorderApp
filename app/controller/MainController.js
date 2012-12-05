@@ -15,12 +15,17 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
         refs: {
           mainView: 'mainview',
           activityView: 'activityview',
+          accountView: 'accountview',
   		},
         control: {
           mainView: {
           	selectActivityEvent: 'selectActivity',
+            selectAccountEvent: 'selectAccount',
           },
           activityView: {
+            backToManViewEvent: 'backToMainView',
+          },
+          accountView: {
             backToManViewEvent: 'backToMainView',
           }
         }
@@ -31,6 +36,10 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     selectActivity: function(){
 		  Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideLeftTransition);
+    },
+
+    selectAccount: function(){
+      Ext.Viewport.animateActiveItem(this.getAccountView(), this.slideLeftTransition);
     },
 
     backToMainView: function(){

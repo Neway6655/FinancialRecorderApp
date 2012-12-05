@@ -23,6 +23,8 @@ Ext.define('FinancialRecorderApp.view.MainView', {
         this.accountButton = Ext.create('Ext.Button', {
             text: 'Account',
             flex: 1,
+            handler: this.selectAccount,
+            scope: this
         });
 
         var topBar = {
@@ -53,4 +55,8 @@ Ext.define('FinancialRecorderApp.view.MainView', {
         this.fireEvent('selectActivityEvent', this);
     },
 
+    selectAccount: function(){
+        console.log('account button tapped.');
+        this.fireEvent('selectAccountEvent', this);
+    }
 });
