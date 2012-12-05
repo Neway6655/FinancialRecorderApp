@@ -1,4 +1,4 @@
-Ext.define('FinancialRecorderApp.controller.Main', {
+Ext.define('FinancialRecorderApp.controller.MainController', {
     extend: 'Ext.app.Controller',
 
     launch: function () {
@@ -13,14 +13,14 @@ Ext.define('FinancialRecorderApp.controller.Main', {
 
     config: {
         refs: {
-          main: 'mainview',
-          activityPanel: 'activitypanel',
+          mainView: 'mainview',
+          activityView: 'activityview',
   		},
         control: {
-          main: {
+          mainView: {
           	selectActivityEvent: 'selectActivity',
           },
-          activityPanel: {
+          activityView: {
             backToManViewEvent: 'backToMainView',
           }
         }
@@ -30,10 +30,10 @@ Ext.define('FinancialRecorderApp.controller.Main', {
     slideRightTransition: { type: 'slide', direction: 'right' },
 
     selectActivity: function(){
-		  Ext.Viewport.animateActiveItem(this.getActivityPanel(), this.slideLeftTransition);
+		  Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideLeftTransition);
     },
 
     backToMainView: function(){
-      Ext.Viewport.animateActiveItem(this.getMain(), this.slideRightTransition);
+      Ext.Viewport.animateActiveItem(this.getMainView(), this.slideRightTransition);
     }
 });

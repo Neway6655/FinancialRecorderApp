@@ -3,13 +3,13 @@ Ext.define('FinancialRecorderApp.store.UserStore',{
 	extend: 'Ext.data.Store',
 	requires: [
         'Ext.data.proxy.JsonP',
-		'FinancialRecorderApp.model.User'
+		'FinancialRecorderApp.model.UserModel'
     ],
 	
 	config: {
 		autoLoad: true,
 		storeId: 'UserStore',
-		model: 'FinancialRecorderApp.model.User',
+		model: 'FinancialRecorderApp.model.UserModel',
 		listeners: {
 		    load: {
 		        fn: function(){console.log('UserStore Loaded!')},

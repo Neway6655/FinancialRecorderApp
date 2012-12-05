@@ -1,4 +1,4 @@
-Ext.define('FinancialRecorderApp.model.User', {
+Ext.define('FinancialRecorderApp.model.UserModel', {
 	extend: 'Ext.data.Model',
 	config: {
 		fields: [

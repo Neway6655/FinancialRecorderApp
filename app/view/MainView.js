@@ -1,4 +1,4 @@
-Ext.define('FinancialRecorderApp.view.Main', {
+Ext.define('FinancialRecorderApp.view.MainView', {
     extend: 'Ext.Panel',
     xtype: 'mainview',
 
@@ -18,7 +18,7 @@ Ext.define('FinancialRecorderApp.view.Main', {
             flex: 1,
             handler: this.selectActivity,
             scope: this
-        });
+       });
 
         this.accountButton = Ext.create('Ext.Button', {
             text: 'Account',

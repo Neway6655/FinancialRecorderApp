@@ -1,7 +1,7 @@
-Ext.define('FinancialRecorderApp.view.ActivityDetail', {
+Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
     extend: 'Ext.Panel',
     requires: "Ext.form.FieldSet",
-    xtype: 'activitydetail',
+    xtype: 'activitydetailview',
 
     config:{
     	layout: 'fit',
@@ -77,7 +77,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetail', {
                 type: 'fit',
             },
              items: [{
-                xtype: 'userselector',
+                xtype: 'userselectorview',
             }],
         });
 

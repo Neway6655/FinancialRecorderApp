@@ -1,4 +1,4 @@
-Ext.define('FinancialRecorderApp.controller.Activity', {
+Ext.define('FinancialRecorderApp.controller.ActivityController', {
     extend: 'Ext.app.Controller',
 
     requires: ['FinancialRecorderApp.store.UserStore'],
@@ -15,13 +15,13 @@ Ext.define('FinancialRecorderApp.controller.Activity', {
 
     config: {
         refs: {
-          main: 'activitypanel',
-    			activityList: 'activitylist',
-    			activityDetail: 'activitydetail',
-          userSelector: 'userselector',
+          activityView: 'activityview',
+    			activityList: 'activitylistview',
+    			activityDetail: 'activitydetailview',
+          userSelector: 'userselectorview',
   			},
         control: {
-          main: {
+          activityView: {
             showNewFinancialRecordEvent: 'showNewFinancialRecord',
           },
           activityList: {
@@ -75,7 +75,7 @@ Ext.define('FinancialRecorderApp.controller.Activity', {
     },
 
     onBackToActivityList: function() {
-        Ext.Viewport.animateActiveItem(this.getMain(), this.slideRightTransition);
+        Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);
     },
 
     saveFinancialRecord: function(){

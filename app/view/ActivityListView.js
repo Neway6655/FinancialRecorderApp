@@ -1,7 +1,7 @@
-Ext.define('FinancialRecorderApp.view.ActivityList', {
+Ext.define('FinancialRecorderApp.view.ActivityListView', {
     extend: 'Ext.List',
-	requires: ['FinancialRecorderApp.store.Recorder'],
-    xtype: 'activitylist',    
+	requires: ['FinancialRecorderApp.store.RecorderStore'],
+    xtype: 'activitylistview',    
     
     config: {
         title: 'Activities',
@@ -11,7 +11,7 @@ Ext.define('FinancialRecorderApp.view.ActivityList', {
 				'{name}---' + 
 				'<small>TotalFee: {totalFee}</small></br>' + 
 				'<small>({userNameList})</small>',
-        store: Ext.create("FinancialRecorderApp.store.Recorder"),
+        store: Ext.create("FinancialRecorderApp.store.RecorderStore"),
         listeners: {
             itemtap: 'activityRecordTap'
         }

@@ -1,4 +1,4 @@
-Ext.define('FinancialRecorderApp.model.Recorder', {
+Ext.define('FinancialRecorderApp.model.RecorderModel', {
 	extend: 'Ext.data.Model',
 	config: {
 		fields: [

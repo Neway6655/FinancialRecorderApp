@@ -6,21 +6,21 @@ Ext.application({
     name: 'FinancialRecorderApp',
 		
 	requires: [
-		'FinancialRecorderApp.view.ActivityMain'
+		'FinancialRecorderApp.view.ActivityView'
     ],
 
-	models: ['Recorder'],
-	controllers: ['Main','Activity'],
-	views: ['Main','ActivityMain', 'ActivityList', 'ActivityDetail', 'UserSelector'],
+	models: ['RecorderModel'],
+	controllers: ['MainController','ActivityController'],
+	views: ['MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'UserSelectorView'],
 	
 	launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        var mainView = Ext.create('FinancialRecorderApp.view.Main');
-        var activityMainView = Ext.create('FinancialRecorderApp.view.ActivityMain');
-        var activityDetailView = Ext.create('FinancialRecorderApp.view.ActivityDetail');
+        var mainView = Ext.create('FinancialRecorderApp.view.MainView');
+        var activityMainView = Ext.create('FinancialRecorderApp.view.ActivityView');
+        var activityDetailView = Ext.create('FinancialRecorderApp.view.ActivityDetailView');
         Ext.Viewport.add(mainView, activityMainView, activityDetailView);
     }
 });

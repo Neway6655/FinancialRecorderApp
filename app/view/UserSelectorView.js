@@ -1,6 +1,6 @@
-Ext.define('FinancialRecorderApp.view.UserSelector', {
+Ext.define('FinancialRecorderApp.view.UserSelectorView', {
     extend: 'Ext.List',
-    alias: 'widget.userselector',
+    xtype: 'userselectorview',
 
     requires: ['FinancialRecorderApp.store.UserStore'],
 

@@ -1,9 +1,9 @@
-Ext.define('FinancialRecorderApp.view.ActivityMain', {
+Ext.define('FinancialRecorderApp.view.ActivityView', {
     extend: 'Ext.Panel',
-	xtype: 'activitypanel',
+	xtype: 'activityview',
 
 	requires: [
-		'FinancialRecorderApp.view.ActivityList'
+		'FinancialRecorderApp.view.ActivityListView'
     ],
 	
 	config: {
@@ -34,7 +34,7 @@ Ext.define('FinancialRecorderApp.view.ActivityMain', {
         };
 
         var activityList = {
-            xtype: 'activitylist',
+            xtype: 'activitylistview',
         };
 
         this.add(topBar, activityList);
