@@ -3,9 +3,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
     xtype: 'mainview',
 
     layout: {
-        type: 'vbox',
-        align:'center',
-        pack:'center'
+        type: 'fit',
     },
 
     activityButton: '',
@@ -14,23 +12,29 @@ Ext.define('FinancialRecorderApp.view.MainView', {
 
     initialize: function() {
         this.activityButton = Ext.create('Ext.Button', {
-            text: 'Activity',
-            flex: 1,
             handler: this.selectActivity,
-            scope: this
+            scope: this,
+            height: 80,
+            width: 80,
+            icon: 'resources/images/activities.png',
        });
 
         this.accountButton = Ext.create('Ext.Button', {
-            text: 'Account',
-            flex: 1,
             handler: this.selectAccount,
-            scope: this
+            scope: this,
+            height: 80,
+            width: 80,
+            icon: 'resources/images/accounts.png',  
         });
 
         var topBar = {
             xtype: 'titlebar',
-            title: 'Activity recorder',
+            title: 'Activity Recorder',
             docked: 'top',
+        };
+
+        var spacer = {
+            xtype: 'spacer',
         };
 
         var centerPanel = {
@@ -40,9 +44,13 @@ Ext.define('FinancialRecorderApp.view.MainView', {
                 align:'center',
                 pack:'center'
             },
+            height: '100%',
+            padding: '50',
+            margin: '100 50 0 50',
+            cls: 'home_panel',
 
             items: [
-                this.activityButton, this.accountButton
+                this.activityButton, spacer, this.accountButton
             ]
         }
 
