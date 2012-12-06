@@ -81,18 +81,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
             }],
         });
 
-		var bottomBar = {
-			xtype: 'titlebar',
-			docked: 'bottom',
-			items:[{
-				xtype: "button",
-		        iconCls: "trash",
-		        iconMask: true,
-		        scope: this
-		    }]
-		};
-
-		this.add(topBar, this.formPanel, userSelectorPanel, bottomBar);
+		this.add(topBar, this.formPanel, userSelectorPanel);
 	},
 
 	loadRecord: function(record){

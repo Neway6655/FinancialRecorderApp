@@ -22,14 +22,6 @@ Ext.define('FinancialRecorderApp.view.AccountView', {
                 align: 'left',
                 handler: this.back,
                 scope: this
-            },
-            {
-                xtype: 'button',
-                ui: 'action',
-                text: 'New',
-                align: 'right',
-                handler: this.create,
-                scope: this
             }],
         };
 
@@ -38,11 +30,6 @@ Ext.define('FinancialRecorderApp.view.AccountView', {
         };
 
         this.add(topBar, accountList);
-    },
-
-    create: function(){
-        console.log('create an new account');
-        // this.fireEvent('showNewFinancialRecordEvent', this);
     },
 
     back: function(){

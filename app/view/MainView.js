@@ -33,7 +33,6 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             docked: 'top',
         };
 
-
         var centerPanel = {
             xtype: 'panel',
             layout: {
