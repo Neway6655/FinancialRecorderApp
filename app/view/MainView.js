@@ -17,7 +17,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             height: 80,
             width: 80,
             icon: 'resources/images/activities.png',
-       });
+        });
 
         this.accountButton = Ext.create('Ext.Button', {
             handler: this.selectAccount,
