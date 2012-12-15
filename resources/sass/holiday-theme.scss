@@ -1,0 +1,221 @@
+// Default Global Theme Variables & Colors
+
+	// THEME COLORS
+    $base-color: #8197BC;
+    $confirm-color: #799D54;
+    $alert-color: #B0886D;
+    $neutral-color: $base-color;
+    $active-color: darken($base-color, 10%);
+    
+    // GRADIENTS
+    $base-gradient: 'matte';
+    
+    // FONTS
+    $font-family: 'Puritan';
+    
+    // LISTS
+    $list-color: darken($active-color, 20%);
+    $list-active-color: transparentize($active-color, .2);
+    $list-active-gradient: 'recessed';
+    $list-header-bg-color: darken($list-active-color, 10%);
+    $list-pressed-color: lighten($list-active-color, 10%);
+    $basic-slider: true;
+
+    // TABS
+    $tabs-dark: transparentize($active-color, 1.0); // This sets the tab selection to transparent
+    $tabs-bottom-active-gradient: color-stops(darken($active-color, 20%), darken($active-color, 20%));  // This sets the color for the "bottom" tab icons and gradient
+    $tabs-bar-gradient: color-stops(lighten($active-color, 30%), $base-color);
+    $tabs-bottom-inactive-gradient: color-stops(red, blue);
+    
+    // TOOLBARS
+	$toolbar-gradient: color-stops(lighten($active-color, 30%), $base-color);
+
+// Sencha Touch 2 Components
+// "Remove components that are not used in your application."
+
+	@import 'sencha-touch/default/all';
+	
+	@include sencha-panel;
+	@include sencha-buttons;
+	@include sencha-sheet;
+	@include sencha-picker;
+	@include sencha-tabs;
+	@include sencha-toolbar;
+	@include sencha-toolbar-forms;
+	@include sencha-indexbar;
+	@include sencha-list;
+	@include sencha-list-paging;
+	@include sencha-list-pullrefresh;
+	@include sencha-layout;
+	@include sencha-carousel;
+	@include sencha-form;
+	@include sencha-msgbox;
+	@include sencha-loading-spinner;
+	
+// TYPOGRAPHY
+
+    // "Defining our custom fonts."
+    //@include font-face("CandyScript",font-files("CandyScript/candy_script-webfont.ttf",
+    //											"CandyScript/candy_script-webfont.eot",
+    //											"CandyScript/candy_script-webfont.svg",
+    //											"CandyScript/candy_script-webfont.woff"));
+    											
+    //@include font-face("Puritan",font-files("Puritan/puritan-webfont.ttf",
+    //											"Puritan/puritan-webfont.eot",
+    //											"Puritan/puritan-webfont.svg",
+    //											"Puritan/puritan-webfont.woff"));
+    											
+// Application Specific (ThemeViewer.app) Overrides
+	.x-layout-card-item, .x-form .x-scroll-container {
+		@include background(image-url('background.png'));
+	    background-size: cover;
+	}
+	
+	.tweet-wrapper {
+	  h2 { font-weight: bold; padding-bottom: 3px; }
+	  img { border-radius: 5px; float: left; }
+	  .tweet {
+	    font-size: 70%;
+	    margin-left: 60px;
+	    min-height: 50px;
+	  }
+	  .posted { float: right; }
+	}
+	
+	@include pictos-iconmask('list');
+	@include pictos-iconmask('time_repeat');
+	@include pictos-iconmask('twitter2');
+
+// Theme Overrides
+
+	// TOOLBARS
+	.x-toolbar-dark{
+		@include background-image(linear-gradient(lighten($active-color, 20%), lighten($active-color, 20%)));
+	}
+	
+	.x-toolbar {
+		&.x-navigation-bar{
+			  @include background(image-url('snowflake.png'),linear-gradient(lighten($active-color, 30%), $active-color));
+		}
+		.x-innerhtml {
+			color: darken($active-color, 20%);
+			font-family: "CandyScript";
+			@include bevel-text('highlight');
+			text-transform: capitalize;
+		}
+	}
+	
+	.x-toolbar .x-button .x-button-label {
+		color: white;
+	}
+	
+	// TABBARS
+	
+	.x-tabbar-dark {
+		&.x-docked-bottom {
+			.x-tab {
+				color: darken($active-color, 20%);
+				.x-button-icon {
+					@include background-image(linear-gradient(lighten($active-color, 40%),white));
+				}
+			}
+			
+			.x-button-label {
+				text-shadow: none;
+			}
+			.x-tab-active {
+				.x-button-icon {
+					@include background-image(linear-gradient(darken($active-color, 20%),darken($active-color, 10%)));	
+				}
+			}
+		}
+		
+	}
+	
+	.x-tabbar-neutral {
+		&.x-docked-top{
+			.x-button-label {
+				color: darken($active-color, 10%);
+				@include bevel-text('highlight');
+			}
+			.x-tab-active {
+				@include background-image(linear-gradient($active-color, lighten($active-color, 30%)));
+				.x-button-label {
+					color: lighten($base-color, 30%);
+					@include bevel-text('shadow');
+				}
+			}
+		}
+	}
+	
+	// FORMS
+	.x-toolbar .x-field-search .x-component-outer, .x-toolbar .x-field-select .x-component-outer, .x-toolbar .x-field-text .x-component-outer {
+		border: 1px solid darken($active-color, 10%);
+	}
+	
+
+	// BUTTONS
+	.x-button {
+		&.x-button-pressing {
+			@include background-image(linear-gradient($active-color, lighten($active-color, 30%))); 
+		}
+		margin: 10px;
+		border: 2px solid darken($active-color, 10%);
+		@include background-image(linear-gradient(lighten($active-color, 30%), $active-color)); 
+		border: 2px solid darken($active-color, 10%);
+		.x-button-label {color: darken($active-color, 10%); }
+		
+		
+		&.x-button-normal, &.x-button-normal-round, &.x-button-normal-small {
+			@include background-image(linear-gradient(lighten($active-color, 30%), $active-color)); 
+			border: 2px solid darken($active-color, 10%);
+			.x-button-label {color: darken($active-color, 10%); }
+			&.x-button-pressed {
+				@include background-image(linear-gradient($active-color, lighten($active-color, 30%)));
+				.x-button-pressing {
+					@include background-image(linear-gradient($active-color, lighten($active-color, 30%))); 
+				}
+				.x-button-label {
+					color: lighten($base-color, 30%);
+					@include bevel-text('shadow');
+				}
+			}
+		}
+		&.x-button-action, &.x-button-action-round, &.x-button-action-small {
+			@include background-image(linear-gradient(lighten($active-color, 30%), $active-color)); 
+			border: 2px solid lighten($active-color, 10%);
+			.x-button-label {color: darken($active-color, 10%); }
+			&.x-button-pressing {
+				@include background-image(linear-gradient($active-color, lighten($active-color, 30%))); 
+			}
+		}
+		&.x-button-confirm, &.x-button-confirm-round, &.x-button-confirm-small {
+			@include background-image(linear-gradient(lighten($confirm-color, 30%), $confirm-color)); 
+			border: 2px solid darken($confirm-color, 10%);
+			.x-button-label {color: darken($confirm-color, 10%); }
+			&.x-button-pressing {
+				@include background-image(linear-gradient($confirm-color, lighten($confirm-color, 30%))); 
+			}
+		}
+		&.x-button-decline, &.x-button-decline-round, &.x-button-decline-small {
+			@include background-image(linear-gradient(lighten($alert-color, 30%), $alert-color)); 
+			border: 2px solid darken($alert-color, 10%);
+			.x-button-label {color: darken($alert-color, 10%); }
+			&.x-button-pressing {
+				@include background-image(linear-gradient($alert-color, lighten($alert-color, 30%))); 
+			}
+		}
+		.x-button-label {
+			font-family: "CandyScript";
+			@include bevel-text('highlight');
+		}
+		
+		&.x-button-plain{
+			.x-button-icon {
+				&.x-icon-mask {
+					@include background-image(linear-gradient(darken($active-color, 20%), darken($active-color, 20%)
+					));
+				}
+			}
+		}
+	}

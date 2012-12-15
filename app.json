@@ -57,7 +57,7 @@
      */
     "css": [
         {
-            "path": "resources/css/app.css",
+            "path": "resources/css/holiday-theme.css",
             "update": "delta"
         }
     ],
