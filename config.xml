@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.hello-world"
         version   = "2.0.0">
-    <name>Hello World</name>
+    <name>FinancialRecorder</name>
 
     <description>
         Financial Recorder.
@@ -19,7 +19,7 @@
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
-    <preference name="android-minSdkVersion" value="10" />
+    <preference name="android-minSdkVersion" value="7" />
     <preference name="android-maxSdkVersion" value="16" />
     <preference name="android-installLocation" value="auto" />
     <preference name="load-url-timeout" value="70000" />
