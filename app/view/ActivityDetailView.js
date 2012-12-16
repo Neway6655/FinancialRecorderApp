@@ -14,6 +14,8 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
     totalFeeField: '',
 
+    attendUserField: '',
+
     saveButton: '',
 
 	initialize: function() {
@@ -31,6 +33,16 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 			label: 'Total Fee',
 		});
 
+		this.attendUserField = Ext.create('FinancialRecorderApp.view.MultiSelect',{
+			xtype : 'multiselectfield',
+            name : 'userNameList',
+            label : 'Attend Users',
+            store : Ext.create("FinancialRecorderApp.store.UserStore"),
+            displayField : 'name',
+            valueField : 'name',
+            usePicker : false
+		});
+
 		this.formPanel = Ext.create('Ext.form.Panel',{
 			items: [{
 				xtype: 'fieldset',
@@ -41,7 +53,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 					labelWidth: '50%'
 				},
 				items: [
-					this.nameField,this.totalFeeField
+					this.nameField, this.totalFeeField, this.attendUserField
 				],
 			}]
 		});
@@ -68,25 +80,14 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
     		}, this.saveButton]
     	};
 
-    	userSelectorPanel = Ext.create('Ext.Panel', {
-            width: '100%',
-            height: '100%',
-            top: 120,
-            layout: {
-                type: 'fit',
-            },
-             items: [{
-                xtype: 'userselectorview',
-            }],
-        });
-
-		this.add(topBar, this.formPanel, userSelectorPanel);
+		this.add(topBar, this.formPanel);
 	},
 
 	loadRecord: function(record){
 		this.formPanel.setRecord(record);
 		this.nameField.setReadOnly(true);
 		this.totalFeeField.setReadOnly(true);
+		this.attendUserField.setReadOnly(true);
 	},
 
 	back: function() {

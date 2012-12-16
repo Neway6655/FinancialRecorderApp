@@ -18,7 +18,6 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           activityView: 'activityview',
     			activityList: 'activitylistview',
     			activityDetail: 'activitydetailview',
-          userSelector: 'userselectorview',
   			},
         control: {
           activityView: {
@@ -43,8 +42,12 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
 
-        this.getUserSelector().setDisableSelection(false);
-        this.getUserSelector().deselectAll();
+        this.getActivityDetail().nameField.setReadOnly(false);
+        this.getActivityDetail().nameField.setValue('');
+        this.getActivityDetail().totalFeeField.setReadOnly(false);
+        this.getActivityDetail().totalFeeField.setValue('');
+        this.getActivityDetail().attendUserField.setReadOnly(false);
+        this.getActivityDetail().attendUserField.setValue('');
         this.getActivityDetail().getSaveButton().show();
         this.getActivityDetail().getForm().reset();
         Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);
@@ -54,22 +57,9 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         if (!this.getActivityDetail()){
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
-    		this.getActivityDetail().loadRecord(record);
-        var userStore = this.getUserSelector().getStore();
+        // record.data.userNameList = record.data.userNameList.join(',');
+        this.getActivityDetail().loadRecord(record);
 
-        for (i=0; i < record.data.userNameList.length; i++){
-          var user = userStore.queryBy(function(userRecord){
-              var userName = record.data.userNameList[i];
-              if (userName === userRecord.get('name')){
-                return true;
-              }
-            });
-          if(user){
-            this.getUserSelector().select(user.items[0], true);
-          }
-        }
-        
-        this.getUserSelector().setDisableSelection(true);
         this.getActivityDetail().getSaveButton().hide();
         Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);
     },
@@ -83,12 +73,19 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         var financialRecord = activityDetail.getValues();
         console.log('name: ' + financialRecord.name);
         console.log('total fee: ' + financialRecord.totalFee);
+        console.log('attend users: ' + financialRecord.userNameList);
 
         var userIdArray = new Array();
-        var selectedUserList = this.getUserSelector().getSelection();
-        for (i=0; i < selectedUserList.length; i ++) { 
-          userIdArray[i] = selectedUserList[i].getData().id;
-          console.log('select user ' + selectedUserList[i].getData().name);
+        var userStore = Ext.getStore('UserStore');
+
+        userNameArray = financialRecord.userNameList.split(',');
+        for (i=0; i < userNameArray.length; i ++) {
+          var user = userStore.queryBy(function(userRecord){
+              if (userNameArray[i] === userRecord.get('name')){
+                return true;
+              }
+            });
+          userIdArray[i] = user.items[0].getData().id;
         }
 
         var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": '+ financialRecord.totalFee +', "userIdList": ['+ userIdArray +']}';

@@ -6,12 +6,13 @@ Ext.application({
     name: 'FinancialRecorderApp',
 		
 	requires: [
-		'FinancialRecorderApp.view.ActivityView'
+		'FinancialRecorderApp.view.ActivityView', 'FinancialRecorderApp.store.UserStore'
     ],
 
 	models: ['RecorderModel'],
+    stores: ['UserStore'],
 	controllers: ['MainController','ActivityController'],
-	views: ['MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'UserSelectorView', 'AccountView'],
+	views: ['MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'AccountView', 'MultiSelect'],
 	
 	launch: function() {
         // Destroy the #appLoadingIndicator element
