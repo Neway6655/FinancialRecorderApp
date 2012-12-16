@@ -48,7 +48,6 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
 		this.saveButton = Ext.create('Ext.Button', {
 			xtype: 'button',
-    		ui: 'action',
     		align: 'right',
     		text: 'Save',
     		handler: this.save,

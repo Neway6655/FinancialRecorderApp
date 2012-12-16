@@ -25,7 +25,6 @@ Ext.define('FinancialRecorderApp.view.ActivityView', {
             },
             {
                 xtype: 'button',
-                ui: 'action',
                 text: 'New',
                 align: 'right',
                 handler: this.create,

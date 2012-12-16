@@ -16,7 +16,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             scope: this,
             height: 80,
             width: 80,
-            text: 'Activity'
+            icon: 'resources/images/activities.png',
         });
 
         this.accountButton = Ext.create('Ext.Button', {
@@ -24,7 +24,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             scope: this,
             height: 80,
             width: 80,
-            text: 'Account'
+            icon: 'resources/images/accounts.png',
         });
 
         var topBar = {
@@ -46,7 +46,6 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             },
             height: '100%',
             padding: '50',
-            // margin: '100 50 0 50',
             cls: 'home_panel',
 
             items: [
