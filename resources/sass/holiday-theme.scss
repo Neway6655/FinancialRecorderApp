@@ -11,7 +11,7 @@
     $base-gradient: 'matte';
     
     // FONTS
-    $font-family: 'Puritan';
+    $font-family: 'KaushanScript';
     
     // LISTS
     $list-color: darken($active-color, 20%);
@@ -55,15 +55,15 @@
 // TYPOGRAPHY
 
     // "Defining our custom fonts."
-    //@include font-face("CandyScript",font-files("CandyScript/candy_script-webfont.ttf",
-    //											"CandyScript/candy_script-webfont.eot",
-    //											"CandyScript/candy_script-webfont.svg",
-    //											"CandyScript/candy_script-webfont.woff"));
+    @include font-face("NewRocker",font-files("NewRocker/NewRocker-webfont.ttf",
+    											"NewRocker/NewRocker-webfont.eot",
+    											"NewRocker/NewRocker-webfont.svg",
+    											"NewRocker/NewRocker-webfont.woff"));
     											
-    //@include font-face("Puritan",font-files("Puritan/puritan-webfont.ttf",
-    //											"Puritan/puritan-webfont.eot",
-    //											"Puritan/puritan-webfont.svg",
-    //											"Puritan/puritan-webfont.woff"));
+    @include font-face("KaushanScript",font-files("KaushanScript/KaushanScript-webfont.ttf",
+    											"KaushanScript/KaushanScript-webfont.eot",
+    											"KaushanScript/KaushanScript-webfont.svg",
+    											"KaushanScript/KaushanScript-webfont.woff"));
     											
 // Application Specific (ThemeViewer.app) Overrides
 	.x-layout-card-item, .x-form .x-scroll-container {
@@ -99,7 +99,7 @@
 		}
 		.x-innerhtml {
 			color: darken($active-color, 20%);
-			font-family: "CandyScript";
+			font-family: "NewRocker";
 			@include bevel-text('highlight');
 			text-transform: capitalize;
 		}
@@ -206,7 +206,7 @@
 			}
 		}
 		.x-button-label {
-			font-family: "CandyScript";
+			font-family: "NewRocker";
 			@include bevel-text('highlight');
 		}
 		

@@ -36,7 +36,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 		this.attendUserField = Ext.create('FinancialRecorderApp.view.MultiSelect',{
 			xtype : 'multiselectfield',
             name : 'userNameList',
-            label : 'Attend Users',
+            label : 'Members',
             store : Ext.create("FinancialRecorderApp.store.UserStore"),
             displayField : 'name',
             valueField : 'name',
@@ -50,7 +50,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 				defaults: {
 					required: true,
 					labelAlign: 'left',
-					labelWidth: '50%'
+					labelWidth: '35%'
 				},
 				items: [
 					this.nameField, this.totalFeeField, this.attendUserField
