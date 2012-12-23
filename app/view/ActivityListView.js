@@ -12,6 +12,12 @@ Ext.define('FinancialRecorderApp.view.ActivityListView', {
 				'<small>TotalFee: {totalFee}</small></br>' + 
 				'<small>({userNameList})</small>',
         store: Ext.create("FinancialRecorderApp.store.RecorderStore"),
+        plugins: [
+            {
+                xclass: 'Ext.plugin.PullRefresh',
+                pullRefreshText: 'Pull down to refresh activity list.'
+            },
+        ],
         listeners: {
             itemtap: 'activityRecordTap'
         }

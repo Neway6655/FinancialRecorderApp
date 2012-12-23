@@ -1,7 +1,7 @@
 Ext.define('FinancialRecorderApp.controller.ActivityController', {
     extend: 'Ext.app.Controller',
 
-    requires: ['FinancialRecorderApp.store.UserStore'],
+    requires: ['FinancialRecorderApp.store.UserStore', 'Ext.MessageBox'],
 
     launch: function () {
        this.callParent();
@@ -89,11 +89,11 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           jsonData: financialRecordJson,
           success: function(response, options) {
             console.log("Successfully create financial record.");
-            alert('Successfully');
+            Ext.Msg.alert('Successful', 'Financial record has been created successfully.', Ext.emptyFn);
           },
           failure: function(response,options){
             console.log("Failed to create financial record.");
-            alert('Failed');
+            Ext.Msg.alert('Fail', 'Financial record created failed.', Ext.emptyFn);
           }
         });
     },
