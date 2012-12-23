@@ -57,7 +57,6 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         if (!this.getActivityDetail()){
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
-        // record.data.userNameList = record.data.userNameList.join(',');
         this.getActivityDetail().loadRecord(record);
 
         this.getActivityDetail().getSaveButton().hide();
@@ -75,20 +74,10 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         console.log('total fee: ' + financialRecord.totalFee);
         console.log('attend users: ' + financialRecord.userNameList);
 
-        var userIdArray = new Array();
-        var userStore = Ext.getStore('UserStore');
-
         userNameArray = financialRecord.userNameList.split(',');
-        for (i=0; i < userNameArray.length; i ++) {
-          var user = userStore.queryBy(function(userRecord){
-              if (userNameArray[i] === userRecord.get('name')){
-                return true;
-              }
-            });
-          userIdArray[i] = user.items[0].getData().id;
-        }
-
-        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": '+ financialRecord.totalFee +', "userIdList": ['+ userIdArray +']}';
+        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": '+ financialRecord.totalFee +', "userIdList": ['+ userNameArray +']}';
+        console.log('post json: ' + financialRecordJson);
+        
         Ext.Ajax.request({
           url: 'http://financialrecorder.cloudfoundry.com/api/finance/create',
           method: 'POST',
