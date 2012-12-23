@@ -74,10 +74,15 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         console.log('total fee: ' + financialRecord.totalFee);
         console.log('attend users: ' + financialRecord.userNameList);
 
+        var userNameStringArray = new Array();
         userNameArray = financialRecord.userNameList.split(',');
-        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": '+ financialRecord.totalFee +', "userIdList": ['+ userNameArray +']}';
+        for(i=0; i < userNameArray.length; i ++){
+          userNameStringArray[i] = '"' + userNameArray[i] + '"';
+        };
+
+        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": '+ financialRecord.totalFee +', "userNameList": ['+ userNameStringArray +']}';
         console.log('post json: ' + financialRecordJson);
-        
+
         Ext.Ajax.request({
           url: 'http://financialrecorder.cloudfoundry.com/api/finance/create',
           method: 'POST',
