@@ -8,6 +8,10 @@ Ext.define('FinancialRecorderApp.store.RecorderStore',{
 	
 	config: {
 		autoLoad: true,
+		sorters: [{
+	        property: 'recordDate',
+	        direction: 'ASCE'
+    	}],
 		model: 'FinancialRecorderApp.model.RecorderModel',
 		proxy: {
 			type: 'jsonp',
