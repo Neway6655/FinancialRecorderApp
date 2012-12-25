@@ -14,6 +14,8 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
     totalFeeField: '',
 
+    activityDate: '',
+
     attendUserField: '',
 
     saveButton: '',
@@ -31,6 +33,13 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 			xtype: 'numberfield',
 			name : 'totalFee',
 			label: 'Total Fee',
+		});
+
+		this.activityDate = Ext.create('Ext.field.DatePicker',{
+			xtype: 'datepickerfield',
+			name : 'recordDate',
+			label: 'Date',
+			value: new Date()
 		});
 
 		this.attendUserField = Ext.create('FinancialRecorderApp.view.MultiSelect',{
@@ -53,7 +62,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 					labelWidth: '35%'
 				},
 				items: [
-					this.nameField, this.totalFeeField, this.attendUserField
+					this.nameField, this.totalFeeField, this.activityDate, this.attendUserField
 				],
 			}]
 		});
@@ -102,6 +111,10 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
 	getForm: function(){
 		return this.formPanel;
+	},
+
+	getActivityDate: function(){
+		return this.activityDate;
 	},
 
 	getSaveButton: function(){

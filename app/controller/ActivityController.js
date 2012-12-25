@@ -72,6 +72,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         var financialRecord = activityDetail.getValues();
         console.log('name: ' + financialRecord.name);
         console.log('total fee: ' + financialRecord.totalFee);
+        console.log('date: ' + this.getActivityDetail().getActivityDate().getFormattedValue());
         console.log('attend users: ' + financialRecord.userNameList);
 
         var userNameStringArray = new Array();
@@ -80,7 +81,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           userNameStringArray[i] = '"' + userNameArray[i] + '"';
         };
 
-        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": '+ financialRecord.totalFee +', "userNameList": ['+ userNameStringArray +']}';
+        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": "'+ financialRecord.totalFee +'", "recordDate": "'+ this.getActivityDetail().getActivityDate().getFormattedValue() +'", "userNameList": ['+ userNameStringArray +']}';
         console.log('post json: ' + financialRecordJson);
 
         Ext.Ajax.request({

@@ -10,7 +10,7 @@ Ext.application({
     ],
 
 	models: ['RecorderModel'],
-    stores: ['UserStore'],
+    stores: ['UserStore', 'RecorderStore'],
 	controllers: ['MainController','ActivityController'],
 	views: ['MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'AccountView', 'MultiSelect'],
 	
