@@ -58,6 +58,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
         this.getActivityDetail().loadRecord(record);
+        this.getActivityDetail().getActivityDate().setValue(new Date(record.data.recordDate));
 
         this.getActivityDetail().getSaveButton().hide();
         Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);

@@ -13,6 +13,12 @@ Ext.define('FinancialRecorderApp.store.RecorderStore',{
 	        direction: 'ASCE'
     	}],
 		model: 'FinancialRecorderApp.model.RecorderModel',
+		listeners: {
+		    load: {
+		        fn: function(){console.log('RecorderStore Loaded!')},
+		        scope: this,   
+		    }
+		},
 		proxy: {
 			type: 'jsonp',
 			url : 'http://financialrecorder.cloudfoundry.com/api/jsonp/finance/list',
