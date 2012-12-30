@@ -1,6 +1,7 @@
 Ext.define('FinancialRecorderApp.view.MainView', {
     extend: 'Ext.Panel',
     xtype: 'mainview',
+    id: 'mainViewId',
 
     layout: {
         type: 'fit',

@@ -13,11 +13,15 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     config: {
         refs: {
+          loginView: 'loginview',
           mainView: 'mainview',
           activityView: 'activityview',
           accountView: 'accountview',
-  		},
+  		  },
         control: {
+          loginView: {
+            loginEvent: 'login',
+          },
           mainView: {
           	selectActivityEvent: 'selectActivity',
             selectAccountEvent: 'selectAccount',
@@ -33,6 +37,25 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     slideLeftTransition: { type: 'slide', direction: 'left' },
     slideRightTransition: { type: 'slide', direction: 'right' },
+
+    login: function(){
+      var loginFormValue = this.getLoginView().getLoginForm().getValues();
+
+      var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
+      Ext.Ajax.request({
+          // url: 'http://localhost:8080/recorder-server/api/user/login',
+          url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+          method: 'POST',
+          jsonData: loginRequestJson,
+          success: function(response, options) {
+            console.log("Login Successful.");
+            Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
+          },
+          failure: function(response,options){
+            console.log("Login Failed.");
+          }
+        });
+    },
 
     selectActivity: function(){
 		  Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideLeftTransition);
