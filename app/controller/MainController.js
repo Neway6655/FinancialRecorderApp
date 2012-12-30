@@ -1,6 +1,8 @@
 Ext.define('FinancialRecorderApp.controller.MainController', {
     extend: 'Ext.app.Controller',
 
+    requires: ['Ext.MessageBox'],
+
     launch: function () {
        this.callParent();
        console.log("main controller launch");
@@ -53,6 +55,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           },
           failure: function(response,options){
             console.log("Login Failed.");
+            Ext.MessageBox.alert('Error', 'User name or password not correct, please try again.');
           }
         });
     },
