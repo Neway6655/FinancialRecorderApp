@@ -1,7 +1,7 @@
 Ext.define('FinancialRecorderApp.controller.ActivityController', {
     extend: 'Ext.app.Controller',
 
-    requires: ['FinancialRecorderApp.store.UserStore', 'Ext.MessageBox'],
+    requires: ['FinancialRecorderApp.store.UserStore'],
 
     launch: function () {
        this.callParent();

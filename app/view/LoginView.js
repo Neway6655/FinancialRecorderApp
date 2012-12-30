@@ -10,7 +10,9 @@ Ext.define('FinancialRecorderApp.view.LoginView', {
 
     formPanel: '',
    
-    loginButton: '',
+    signinButton: '',
+
+    signupButton: '',
 
 	initialize: function() {
 		console.log('init login view.');
@@ -43,15 +45,27 @@ Ext.define('FinancialRecorderApp.view.LoginView', {
 			}]
 		});
 
-		this.loginButton = Ext.create('Ext.Button', {
+		this.signinButton = Ext.create('Ext.Button', {
 			xtype: 'button',
     		align: 'right',
-    		text: 'Login',
-    		ui: 'confirm',
+    		text: 'Sign In',
+    		ui: 'normal',
     		width: '100px',
-            left: '100px',
+            left: '80px',
             top: '150px',
-    		handler: this.login,
+    		handler: this.signin,
+    		scope: this
+		});
+
+		this.signupButton = Ext.create('Ext.Button', {
+			xtype: 'button',
+    		align: 'right',
+    		text: 'Sign up now.',
+    		ui: 'confirm',
+    		width: '140px',
+            left: '200px',
+            top: '150px',
+    		handler: this.signup,
     		scope: this
 		});
 
@@ -61,13 +75,18 @@ Ext.define('FinancialRecorderApp.view.LoginView', {
     		title: 'Financial Recorder',
     	};
 
-		this.add(topBar, this.formPanel, this.loginButton);
+		this.add(topBar, this.formPanel, this.signinButton, this.signupButton);
 	},
 
 
-	login: function(){
+	signin: function(){
 		console.log('login tapped.');
-		this.fireEvent('loginEvent', this);
+		this.fireEvent('signinEvent', this);
+	},
+
+	signup: function(){
+		console.log('sign up tapped.');
+		this.fireEvent('signupEvent', this);
 	},
 
 	getLoginForm: function(){

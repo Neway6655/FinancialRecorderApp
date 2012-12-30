@@ -22,7 +22,8 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
   		  },
         control: {
           loginView: {
-            loginEvent: 'login',
+            signinEvent: 'signin',
+            signupEvent: 'signup',
           },
           mainView: {
           	selectActivityEvent: 'selectActivity',
@@ -40,7 +41,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
     slideLeftTransition: { type: 'slide', direction: 'left' },
     slideRightTransition: { type: 'slide', direction: 'right' },
 
-    login: function(){
+    signin: function(){
       var loginFormValue = this.getLoginView().getLoginForm().getValues();
 
       var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
@@ -55,7 +56,27 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           },
           failure: function(response,options){
             console.log("Login Failed.");
-            Ext.MessageBox.alert('Error', 'User name or password not correct, please try again.');
+            Ext.Msg.alert('Error', 'User name or password not correct, please try again.', Ext.emptyFn);
+          }
+        });
+    },
+
+    signup: function(){
+      var signupFormValue = this.getLoginView().getLoginForm().getValues();
+
+      var registerRequestJson = '{"userName": "'+ signupFormValue.userName +'", "password": "'+ signupFormValue.password +'"}';
+      Ext.Ajax.request({
+          // url: 'http://localhost:8080/recorder-server/api/user/register',
+          url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+          method: 'POST',
+          jsonData: registerRequestJson,
+          success: function(response, options) {
+            console.log("Sign up Successful.");
+            Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
+          },
+          failure: function(response,options){
+            console.log("Sign up Failed.");
+            Ext.Msg.alert('Error', 'User name already registered, please try again.', Ext.emptyFn);
           }
         });
     },
