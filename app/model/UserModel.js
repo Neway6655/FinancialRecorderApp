@@ -4,7 +4,8 @@ Ext.define('FinancialRecorderApp.model.UserModel', {
 		fields: [
 					{name: 'id', type: 'int'},
 					{name: 'name', type: 'string'},
-					{name: 'balance', type: 'int'}
+					{name: 'balance', type: 'int'},
+					{name: 'type', type: 'int'}
 				]
 	}
 });

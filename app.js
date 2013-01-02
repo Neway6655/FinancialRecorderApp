@@ -12,7 +12,17 @@ Ext.application({
 	models: ['RecorderModel'],
     stores: ['UserStore', 'RecorderStore'],
 	controllers: ['MainController','ActivityController'],
-	views: ['LoginView','MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'AccountView', 'MultiSelect'],
+	views: ['LoginView','MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'AccountView', 'AccountDetailView', 'MultiSelect'],
+
+    currentUser: '',
+
+    setCurrentUser: function(userName){
+        this.currentUser = userName;
+    },
+
+    getCurrentUser: function(){
+        return this.currentUser;
+    },
 	
 	launch: function() {
         // Destroy the #appLoadingIndicator element
@@ -25,7 +35,8 @@ Ext.application({
         var activityDetailView = Ext.create('FinancialRecorderApp.view.ActivityDetailView');
         
         var accountView = Ext.create('FinancialRecorderApp.view.AccountView');
+        var accountDetailView = Ext.create('FinancialRecorderApp.view.AccountDetailView');
 
-        Ext.Viewport.add(loginView, mainView, activityView, activityDetailView, accountView);
+        Ext.Viewport.add(loginView, mainView, activityView, activityDetailView, accountView, accountDetailView);
     }
 });

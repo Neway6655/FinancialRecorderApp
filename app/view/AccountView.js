@@ -34,6 +34,6 @@ Ext.define('FinancialRecorderApp.view.AccountView', {
 
     back: function(){
         console.log('back to main view');
-        this.fireEvent('backToManViewEvent', this);
+        this.fireEvent('backToMainViewEvent', this);
     },
 });

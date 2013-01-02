@@ -1,7 +1,7 @@
 Ext.define('FinancialRecorderApp.controller.MainController', {
     extend: 'Ext.app.Controller',
 
-    requires: ['Ext.MessageBox'],
+    requires: ['Ext.MessageBox', 'FinancialRecorderApp.store.UserStore'],
 
     launch: function () {
        this.callParent();
@@ -19,6 +19,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           mainView: 'mainview',
           activityView: 'activityview',
           accountView: 'accountview',
+          accountDetailView: 'accountdetailview',
   		  },
         control: {
           loginView: {
@@ -30,10 +31,13 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
             selectAccountEvent: 'selectAccount',
           },
           activityView: {
-            backToManViewEvent: 'backToMainView',
+            backToMainViewEvent: 'backToMainView',
           },
           accountView: {
-            backToManViewEvent: 'backToMainView',
+            backToMainViewEvent: 'backToMainView',
+          },
+          accountDetailView: {
+            backToMainViewEvent: 'backToMainView',
           }
         }
     },
@@ -46,12 +50,12 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
       var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
       Ext.Ajax.request({
-          // url: 'http://localhost:8080/recorder-server/api/user/login',
-          url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+          url: 'http://localhost:8080/recorder-server/api/user/login',
+          // url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
           method: 'POST',
           jsonData: loginRequestJson,
           success: function(response, options) {
-            console.log("Login Successful.");
+            FinancialRecorderApp.app.setCurrentUser(response.responseText);
             Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
           },
           failure: function(response,options){
@@ -66,12 +70,13 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
       var registerRequestJson = '{"userName": "'+ signupFormValue.userName +'", "password": "'+ signupFormValue.password +'"}';
       Ext.Ajax.request({
-          // url: 'http://localhost:8080/recorder-server/api/user/register',
-          url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+          url: 'http://localhost:8080/recorder-server/api/user/register',
+          // url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
           method: 'POST',
           jsonData: registerRequestJson,
           success: function(response, options) {
-            console.log("Sign up Successful.");
+            console.log("Sign up Successful, user: " + response.responseText);
+            FinancialRecorderApp.app.setCurrentUser(response.responseText);
             Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
           },
           failure: function(response,options){
@@ -86,10 +91,45 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
     },
 
     selectAccount: function(){
-      Ext.Viewport.animateActiveItem(this.getAccountView(), this.slideLeftTransition);
+      this.fetchLatest();
+      var currentUserName = FinancialRecorderApp.app.getCurrentUser();
+      var userStore = Ext.getStore('UserStore');
+      var currentUser = userStore.queryBy(function(record){
+        var userName = record.get('name');
+        if (userName === currentUserName){
+          return true;
+        }
+      });
+
+
+      if (currentUser.get(0).data.type === 2){
+        // normal user.
+        this.getAccountDetailView().loadFormRecord(currentUser.get(0));
+        Ext.Viewport.animateActiveItem(this.getAccountDetailView(), this.slideLeftTransition);
+      }else {
+        // administrator.
+        Ext.Viewport.animateActiveItem(this.getAccountView(), this.slideLeftTransition);
+      }
     },
 
     backToMainView: function(){
       Ext.Viewport.animateActiveItem(this.getMainView(), this.slideRightTransition);
-    }
+    },
+
+    fetchLatest: function() {
+        var store = Ext.getStore('UserStore'),
+            proxy = store.getProxy(),
+            operation;
+
+        operation = Ext.create('Ext.data.Operation', {
+            page: 1,
+            start: 0,
+            model: store.getModel(),
+            limit: store.getPageSize(),
+            action: 'read',
+            filters: store.getRemoteFilter() ? store.getFilters() : []
+        });
+
+        proxy.read(operation, this.onLatestFetched, this);
+    },
 });
