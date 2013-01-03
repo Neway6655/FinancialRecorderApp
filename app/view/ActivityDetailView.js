@@ -62,7 +62,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 					labelWidth: '35%'
 				},
 				items: [
-					this.nameField, this.totalFeeField, this.activityDate, this.attendUserField
+					this.nameField, this.activityDate, this.totalFeeField, this.attendUserField
 				],
 			}]
 		});
