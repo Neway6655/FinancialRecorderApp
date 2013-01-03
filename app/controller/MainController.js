@@ -92,15 +92,16 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     selectAccount: function(){
       this.fetchLatest();
+    },
+
+    showAccountView: function(userStore){
       var currentUserName = FinancialRecorderApp.app.getCurrentUser();
-      var userStore = Ext.getStore('UserStore');
       var currentUser = userStore.queryBy(function(record){
         var userName = record.get('name');
         if (userName === currentUserName){
           return true;
         }
       });
-
 
       if (currentUser.get(0).data.type === 2){
         // normal user.
@@ -131,5 +132,30 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
         });
 
         proxy.read(operation, this.onLatestFetched, this);
+    },
+
+    onLatestFetched: function(operation) {
+        var store      = Ext.getStore('UserStore'),
+            oldRecords = store.getData(),
+            newRecords = operation.getRecords(),
+            length     = newRecords.length,
+            toInsert   = [],
+            newRecord, oldRecord, i;
+
+        for (i = 0; i < length; i++) {
+            newRecord = newRecords[i];
+            oldRecord = oldRecords.getByKey(newRecord.getId());
+
+            if (oldRecord) {
+                oldRecord.set(newRecord.getData());
+            } else {
+                toInsert.push(newRecord);
+            }
+
+            oldRecord = undefined;
+        }
+        store.insert(0, toInsert);
+
+        this.showAccountView(store);
     },
 });
