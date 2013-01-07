@@ -11,6 +11,12 @@ Ext.define('FinancialRecorderApp.view.AccountListView', {
 				'{name}---' + 
 				'<small>Balance: {balance}</small>',
         store: Ext.create("FinancialRecorderApp.store.UserStore"),
+        plugins: [
+            {
+                xclass: 'Ext.plugin.PullRefresh',
+                pullRefreshText: 'Pull down to refresh account list.'
+            },
+        ],
         listeners: {
             itemtap: 'accountRecordTap'
         }
@@ -18,6 +24,6 @@ Ext.define('FinancialRecorderApp.view.AccountListView', {
 
     accountRecordTap: function (list, index, item, record) {
         console.log('account record tapped.' + record.data.name);
-        // this.fireEvent('accountRecordTapEvent', this, record);
+        this.fireEvent('accountRecordTapEvent', this, record);
     }
 });
