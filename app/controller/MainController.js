@@ -92,7 +92,6 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     selectAccount: function(){
       Ext.getStore('UserStore').load(function(records, operation, success){
-        console.log('UserStore reload records: ' + records);
         var currentUserName = FinancialRecorderApp.app.getCurrentUser();   
         var index;
         for(index = 0; index < records.length; index ++){

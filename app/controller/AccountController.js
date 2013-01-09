@@ -34,6 +34,7 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
     slideRightTransition: { type: 'slide', direction: 'right' },
 
     gotoAccountCashinView: function(){
+      this.getAccountCashinView().getCashinForm().reset();
       Ext.Viewport.animateActiveItem(this.getAccountCashinView(), this.slideLeftTransition);
     },
 
@@ -56,7 +57,6 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
             Ext.Msg.alert('Successful', 'Cashin successfully.', Ext.emptyFn);
 
             Ext.getStore('UserStore').load(function(records, operation, success){
-              console.log('UserStore reload records: ' + records);
               var userName = cashinFormData.name;
               var index;
               for(index = 0; index < records.length; index ++){

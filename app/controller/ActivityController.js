@@ -17,7 +17,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         refs: {
           activityView: 'activityview',
     			activityList: 'activitylistview',
-    			activityDetail: 'activitydetailview',
+    			activityDetailView: 'activitydetailview',
   			},
         control: {
           activityView: {
@@ -26,7 +26,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           activityList: {
             activityRecordTapEvent: 'viewFinancialRecord',
           },
-          activityDetail: {
+          activityDetailView: {
             backToActivityListEvent: 'onBackToActivityList',
             saveActivityEvent: 'saveFinancialRecord'
           }
@@ -38,30 +38,28 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
     slideRightTransition: { type: 'slide', direction: 'right' },
 
     showNewFinancialRecord: function(){
-        if (!this.getActivityDetail()){
+        if (!this.getActivityDetailView()){
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
 
-        this.getActivityDetail().nameField.setReadOnly(false);
-        this.getActivityDetail().nameField.setValue('');
-        this.getActivityDetail().totalFeeField.setReadOnly(false);
-        this.getActivityDetail().totalFeeField.setValue('');
-        this.getActivityDetail().attendUserField.setReadOnly(false);
-        this.getActivityDetail().attendUserField.setValue('');
-        this.getActivityDetail().getSaveButton().show();
-        this.getActivityDetail().getForm().reset();
-        Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);
+        this.getActivityDetailView().nameField.setReadOnly(false);
+        this.getActivityDetailView().totalFeeField.setReadOnly(false);
+        this.getActivityDetailView().attendUserField.setReadOnly(false);
+        this.getActivityDetailView().attendUserField.setValue('');
+        this.getActivityDetailView().getSaveButton().show();
+        this.getActivityDetailView().getForm().reset();
+        Ext.Viewport.animateActiveItem(this.getActivityDetailView(), this.slideLeftTransition);
     },
 
     viewFinancialRecord: function(list, record) {
-        if (!this.getActivityDetail()){
+        if (!this.getActivityDetailView()){
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
-        this.getActivityDetail().loadRecord(record);
-        this.getActivityDetail().getActivityDate().setValue(new Date(record.data.recordDate));
+        this.getActivityDetailView().loadRecord(record);
+        this.getActivityDetailView().getActivityDate().setValue(new Date(record.data.recordDate));
 
-        this.getActivityDetail().getSaveButton().hide();
-        Ext.Viewport.animateActiveItem(this.getActivityDetail(), this.slideLeftTransition);
+        this.getActivityDetailView().getSaveButton().hide();
+        Ext.Viewport.animateActiveItem(this.getActivityDetailView(), this.slideLeftTransition);
     },
 
     onBackToActivityList: function() {
@@ -69,11 +67,11 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
     },
 
     saveFinancialRecord: function(){
-        var activityDetail = this.getActivityDetail().getForm();
+        var activityDetail = this.getActivityDetailView().getForm();
         var financialRecord = activityDetail.getValues();
         console.log('name: ' + financialRecord.name);
         console.log('total fee: ' + financialRecord.totalFee);
-        console.log('date: ' + this.getActivityDetail().getActivityDate().getFormattedValue());
+        console.log('date: ' + this.getActivityDetailView().getActivityDate().getFormattedValue());
         console.log('attend users: ' + financialRecord.userNameList);
 
         var userNameStringArray = new Array();
@@ -82,7 +80,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           userNameStringArray[i] = '"' + userNameArray[i] + '"';
         };
 
-        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": "'+ financialRecord.totalFee +'", "recordDate": "'+ this.getActivityDetail().getActivityDate().getFormattedValue() +'", "userNameList": ['+ userNameStringArray +']}';
+        var financialRecordJson = '{"name": "'+ financialRecord.name +'", "totalFee": "'+ financialRecord.totalFee +'", "recordDate": "'+ this.getActivityDetailView().getActivityDate().getFormattedValue() +'", "userNameList": ['+ userNameStringArray +']}';
         console.log('post json: ' + financialRecordJson);
         Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);  
 
