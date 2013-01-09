@@ -1,6 +1,7 @@
 Ext.define('FinancialRecorderApp.view.AccountView', {
     extend: 'Ext.Panel',
 	xtype: 'accountview',
+    id: 'accountView',
 
 	requires: [
 		'FinancialRecorderApp.view.AccountListView'
@@ -9,6 +10,8 @@ Ext.define('FinancialRecorderApp.view.AccountView', {
 	config: {
 		layout: 'fit',
     },
+
+    accountList: '',
 
     initialize: function() {
         var topBar = {
@@ -25,15 +28,19 @@ Ext.define('FinancialRecorderApp.view.AccountView', {
             }],
         };
 
-        var accountList = {
+        this.accountList = Ext.create('FinancialRecorderApp.view.AccountListView', {
             xtype: 'accountlistview',
-        };
+        });
 
-        this.add(topBar, accountList);
+        this.add(topBar, this.accountList);
     },
 
     back: function(){
         console.log('back to main view');
         this.fireEvent('backToMainViewEvent', this);
     },
+
+    getAccountList: function() {
+        return this.accountList;
+    }
 });

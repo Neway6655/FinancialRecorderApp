@@ -46,7 +46,6 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
       var cashinRequestJson = '{"userName":"' + cashinFormData.name + '", "amount":"' + cashinFormData.amount + '"}';
       console.log('cashinRequestJson: ' + cashinRequestJson);
 
-      Ext.Viewport.animateActiveItem(this.getAccountView(), this.slideRightTransition);
       Ext.Ajax.request({
           // url: 'http://financialrecorder.cloudfoundry.com/api/finance/cashin',
           url: 'http://localhost:8080/recorder-server/api/finance/cashin',
@@ -55,6 +54,20 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
           success: function(response, options) {
             console.log("Cashin Successfully.");
             Ext.Msg.alert('Successful', 'Cashin successfully.', Ext.emptyFn);
+
+            Ext.getStore('UserStore').load(function(records, operation, success){
+              console.log('UserStore reload records: ' + records);
+              var userName = cashinFormData.name;
+              var index;
+              for(index = 0; index < records.length; index ++){
+                if (userName === records[index].data.name){
+                  break;
+                }
+              }
+              var user = records[index];
+              Ext.getCmp('accountView').getAccountList().refresh();
+              Ext.Viewport.animateActiveItem(Ext.getCmp('accountView'), { type: 'slide', direction: 'right' });
+            }, this);
           },
           failure: function(response,options){
             console.log("Cashin Failed.");
