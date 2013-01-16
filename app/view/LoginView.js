@@ -51,7 +51,7 @@ Ext.define('FinancialRecorderApp.view.LoginView', {
     		text: 'Sign In',
     		ui: 'normal',
     		width: '100px',
-            left: '80px',
+            left: '20px',
             top: '150px',
     		handler: this.signin,
     		scope: this
@@ -63,7 +63,7 @@ Ext.define('FinancialRecorderApp.view.LoginView', {
     		text: 'Sign up now.',
     		ui: 'confirm',
     		width: '140px',
-            left: '200px',
+            left: '140px',
             top: '150px',
     		handler: this.signup,
     		scope: this
