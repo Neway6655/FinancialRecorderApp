@@ -33,8 +33,8 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
     slideLeftTransition: { type: 'slide', direction: 'left' },
     slideRightTransition: { type: 'slide', direction: 'right' },
 
-    gotoAccountCashinView: function(){
-      this.getAccountCashinView().getCashinForm().reset();
+    gotoAccountCashinView: function(list, record){
+      this.getAccountCashinView().getCashinForm().loadRecord(record);
       Ext.Viewport.animateActiveItem(this.getAccountCashinView(), this.slideLeftTransition);
     },
 
