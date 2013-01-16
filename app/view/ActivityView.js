@@ -10,7 +10,19 @@ Ext.define('FinancialRecorderApp.view.ActivityView', {
 		layout: 'fit',
     },
 
+    activityList: '',
+
+    newButton: '',
+
     initialize: function() {
+        this.newButton = Ext.create('Ext.Button', {
+            xtype: 'button',
+            text: 'New',
+            align: 'right',
+            handler: this.create,
+            scope: this
+        });
+
         var topBar = {
             xtype: 'titlebar',
             title: 'Activity List',
@@ -22,21 +34,15 @@ Ext.define('FinancialRecorderApp.view.ActivityView', {
                 align: 'left',
                 handler: this.back,
                 scope: this
-            },
-            {
-                xtype: 'button',
-                text: 'New',
-                align: 'right',
-                handler: this.create,
-                scope: this
-            }],
+            }, 
+            this.newButton],
         };
 
-        var activityList = {
+        this.activityList = Ext.create('FinancialRecorderApp.view.ActivityListView',{
             xtype: 'activitylistview',
-        };
+        });
 
-        this.add(topBar, activityList);
+        this.add(topBar, this.activityList);
     },
 
     create: function(){
@@ -47,5 +53,13 @@ Ext.define('FinancialRecorderApp.view.ActivityView', {
     back: function(){
         console.log('back to main view');
         this.fireEvent('backToMainViewEvent', this);
+    },
+
+    getActivityList: function(){
+        return this.activityList;
+    },
+
+    getNewButton: function(){
+        return this.newButton;
     },
 });

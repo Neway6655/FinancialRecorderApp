@@ -48,8 +48,8 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
       console.log('cashinRequestJson: ' + cashinRequestJson);
 
       Ext.Ajax.request({
-          // url: 'http://financialrecorder.cloudfoundry.com/api/finance/cashin',
-          url: 'http://localhost:8080/recorder-server/api/finance/cashin',
+          url: 'http://financialrecorder.cloudfoundry.com/api/finance/cashin',
+          // url: 'http://localhost:8080/recorder-server/api/finance/cashin',
           method: 'POST',
           jsonData: cashinRequestJson,
           success: function(response, options) {
