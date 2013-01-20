@@ -9,10 +9,10 @@ Ext.application({
 		'FinancialRecorderApp.view.ActivityView', 'FinancialRecorderApp.store.UserStore'
     ],
 
-	models: ['RecorderModel'],
-    stores: ['UserStore', 'RecorderStore'],
+	models: ['RecorderModel', 'TransactionHistoryModel'],
+    stores: ['UserStore', 'RecorderStore', 'TransactionHistoryStore'],
 	controllers: ['MainController','ActivityController', 'AccountController'],
-	views: ['LoginView','MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'AccountView', 'AccountDetailView', 'AccountCashinView','MultiSelect'],
+	views: ['LoginView','MainView','ActivityView', 'ActivityListView', 'ActivityDetailView', 'AccountView', 'AccountDetailView', 'AccountCashinView', 'TransactionHistoryView', 'MultiSelect'],
 
     currentUser: '',
 
@@ -38,6 +38,8 @@ Ext.application({
         var accountDetailView = Ext.create('FinancialRecorderApp.view.AccountDetailView');
         var accountCashinView = Ext.create('FinancialRecorderApp.view.AccountCashinView');
 
-        Ext.Viewport.add(loginView, mainView, activityView, activityDetailView, accountView, accountDetailView);
+        var transactionHistoryView = Ext.create('FinancialRecorderApp.view.TransactionHistoryView')
+
+        Ext.Viewport.add(loginView, mainView, activityView, activityDetailView, accountView, accountDetailView, transactionHistoryView);
     }
 });

@@ -11,6 +11,8 @@ Ext.define('FinancialRecorderApp.view.MainView', {
 
     accountButton: '',
 
+    transactionHistoryButton: '',
+
     initialize: function() {
         this.activityButton = Ext.create('Ext.Button', {
             handler: this.selectActivity,
@@ -28,6 +30,14 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             icon: 'resources/images/accounts.png',
         });
 
+        this.transactionHistoryButton = Ext.create('Ext.Button', {
+            handler: this.selectTransactionHistory,
+            scope: this,
+            height: 80,
+            width: 80,
+            text: 'History',
+        });
+
         var topBar = {
             xtype: 'titlebar',
             title: 'Activity Recorder',
@@ -38,7 +48,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             xtype: 'spacer',
         };
 
-        var centerPanel = {
+        var upPanel = {
             xtype: 'panel',
             layout: {
                 type: 'hbox',
@@ -52,9 +62,25 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             items: [
                 this.activityButton, spacer, this.accountButton
             ]
-        }
+        };
 
-        this.add(topBar, centerPanel);
+        var downPanel = {
+            xtype: 'panel',
+            layout: {
+                type: 'hbox',
+                align:'center',
+                pack:'center'
+            },
+            height: '100%',
+            padding: '50',
+            cls: 'home_panel',
+
+            items: [
+                this.transactionHistoryButton, spacer, spacer
+            ]
+        };
+
+        this.add(topBar, upPanel, downPanel);
     },
 
     selectActivity: function() {
@@ -65,5 +91,10 @@ Ext.define('FinancialRecorderApp.view.MainView', {
     selectAccount: function(){
         console.log('account button tapped.');
         this.fireEvent('selectAccountEvent', this);
+    },
+
+    selectTransactionHistory: function(){
+        console.log('transaction history button tapped.');
+        this.fireEvent('selectTransactionHistoryEvent', this);  
     }
 });

@@ -20,6 +20,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           activityView: 'activityview',
           accountView: 'accountview',
           accountDetailView: 'accountdetailview',
+          transactionHistoryView: 'transactionhistoryview',
   		  },
         control: {
           loginView: {
@@ -29,6 +30,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           mainView: {
           	selectActivityEvent: 'selectActivity',
             selectAccountEvent: 'selectAccount',
+            selectTransactionHistoryEvent: 'selectTransactionHistory',
           },
           activityView: {
             backToMainViewEvent: 'backToMainView',
@@ -37,6 +39,9 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
             backToMainViewEvent: 'backToMainView',
           },
           accountDetailView: {
+            backToMainViewEvent: 'backToMainView',
+          },
+          transactionHistoryView: {
             backToMainViewEvent: 'backToMainView',
           }
         }
@@ -50,8 +55,8 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
       var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
       Ext.Ajax.request({
-          // url: 'http://localhost:8080/recorder-server/api/user/login',
-          url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+          url: 'http://localhost:8080/recorder-server/api/user/login',
+          // url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
           method: 'POST',
           jsonData: loginRequestJson,
           success: function(response, options) {
@@ -70,8 +75,8 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
       var registerRequestJson = '{"userName": "'+ signupFormValue.userName +'", "password": "'+ signupFormValue.password +'"}';
       Ext.Ajax.request({
-          // url: 'http://localhost:8080/recorder-server/api/user/register',
-          url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
+          url: 'http://localhost:8080/recorder-server/api/user/register',
+          // url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
           method: 'POST',
           jsonData: registerRequestJson,
           success: function(response, options) {
@@ -108,7 +113,6 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
         // recorderStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/user/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
         recorderStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/user/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
         recorderStore.load(function(records, operation, success){
-          var data = recorderStore.getData();
           Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideLeftTransition);
         }, this);
       }else {
@@ -137,6 +141,15 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           // administrator.
           Ext.Viewport.animateActiveItem(this.getAccountView(), this.slideLeftTransition);
         }
+      }, this);
+    },
+
+    selectTransactionHistory: function(){
+      var transactionHistoryStore = this.getTransactionHistoryView().getTransactionHistoryList().getStore();
+      // transactionHistoryStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+      transactionHistoryStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+      transactionHistoryStore.load(function(records, operation, success){
+        Ext.Viewport.animateActiveItem(this.getTransactionHistoryView(), this.slideLeftTransition);
       }, this);
     },
 
