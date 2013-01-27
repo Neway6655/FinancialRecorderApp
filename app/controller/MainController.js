@@ -54,6 +54,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var loginFormValue = this.getLoginView().getLoginForm().getValues();
 
       var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
+      Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.Ajax.request({
           url: 'http://localhost:8080/recorder-server/api/user/login',
           // url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
@@ -61,6 +62,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           jsonData: loginRequestJson,
           success: function(response, options) {
             FinancialRecorderApp.app.setCurrentUser(response.responseText);
+            Ext.Viewport.setMasked(false);
             Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
           },
           failure: function(response,options){
@@ -74,6 +76,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var signupFormValue = this.getLoginView().getLoginForm().getValues();
 
       var registerRequestJson = '{"userName": "'+ signupFormValue.userName +'", "password": "'+ signupFormValue.password +'"}';
+      Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.Ajax.request({
           url: 'http://localhost:8080/recorder-server/api/user/register',
           // url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
@@ -82,16 +85,19 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           success: function(response, options) {
             console.log("Sign up Successful, user: " + response.responseText);
             FinancialRecorderApp.app.setCurrentUser(response.responseText);
+            Ext.Viewport.setMasked(false);
             Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
           },
           failure: function(response,options){
             console.log("Sign up Failed.");
+            Ext.Viewport.setMasked(false);
             Ext.Msg.alert('Error', 'User name already registered, please try again.', Ext.emptyFn);
           }
         });
     },
 
     selectActivity: function(){
+      Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.getStore('UserStore').load(function(records, operation, success){
         var currentUserName = FinancialRecorderApp.app.getCurrentUser();   
         var index;
@@ -101,6 +107,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           }
         }
         var currentUser = records[index];
+        Ext.Viewport.setMasked(false);
         this.showActivityView(currentUser.data.type);
       }, this);
     },
@@ -124,6 +131,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
 
     selectAccount: function(){
+      Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.getStore('UserStore').load(function(records, operation, success){
         var currentUserName = FinancialRecorderApp.app.getCurrentUser();   
         var index;
@@ -133,6 +141,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           }
         }
         var currentUser = records[index];
+        Ext.Viewport.setMasked(false);
         if (currentUser.data.type === 2){
           // normal user.
           this.getAccountDetailView().loadFormRecord(currentUser);
@@ -148,7 +157,9 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var transactionHistoryStore = this.getTransactionHistoryView().getTransactionHistoryList().getStore();
       // transactionHistoryStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
       transactionHistoryStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+      Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       transactionHistoryStore.load(function(records, operation, success){
+        Ext.Viewport.setMasked(false);
         Ext.Viewport.animateActiveItem(this.getTransactionHistoryView(), this.slideLeftTransition);
       }, this);
     },

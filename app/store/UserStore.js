@@ -10,12 +10,6 @@ Ext.define('FinancialRecorderApp.store.UserStore',{
 		autoLoad: true,
 		storeId: 'UserStore',
 		model: 'FinancialRecorderApp.model.UserModel',
-		listeners: {
-		    load: {
-		        fn: function(){console.log('UserStore Loaded!')},
-		        scope: this,   
-		    }
-		},
 		proxy: {
 			type: 'jsonp',
 			url : 'http://financialrecorder.cloudfoundry.com/api/jsonp/user/list',
