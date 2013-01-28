@@ -4,7 +4,7 @@ Ext.define('FinancialRecorderApp.model.TransactionHistoryModel', {
 		fields: [
 					{name: 'userName', type: 'string'},
 					{name: 'type', type: 'string'},
-					{name: 'createdTime', type: 'int'},
+					{name: 'createdTime', type: 'string'},
 					{name: 'amount', type: 'float'}
 				]
 	}

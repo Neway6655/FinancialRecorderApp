@@ -56,8 +56,8 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.Ajax.request({
-          url: 'http://localhost:8080/recorder-server/api/user/login',
-          // url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+          // url: 'http://localhost:8080/recorder-server/api/user/login',
+          url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
           method: 'POST',
           jsonData: loginRequestJson,
           success: function(response, options) {
@@ -78,8 +78,8 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var registerRequestJson = '{"userName": "'+ signupFormValue.userName +'", "password": "'+ signupFormValue.password +'"}';
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.Ajax.request({
-          url: 'http://localhost:8080/recorder-server/api/user/register',
-          // url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
+          // url: 'http://localhost:8080/recorder-server/api/user/register',
+          url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
           method: 'POST',
           jsonData: registerRequestJson,
           success: function(response, options) {
@@ -155,8 +155,8 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     selectTransactionHistory: function(){
       var transactionHistoryStore = this.getTransactionHistoryView().getTransactionHistoryList().getStore();
-      // transactionHistoryStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
-      transactionHistoryStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+      transactionHistoryStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+      // transactionHistoryStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       transactionHistoryStore.load(function(records, operation, success){
         Ext.Viewport.setMasked(false);
