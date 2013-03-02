@@ -19,7 +19,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             scope: this,
             height: 80,
             width: 80,
-            icon: 'resources/images/activities.png',
+            text: 'Activity',
         });
 
         this.accountButton = Ext.create('Ext.Button', {
@@ -27,7 +27,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             scope: this,
             height: 80,
             width: 80,
-            icon: 'resources/images/accounts.png',
+            text: 'Account',
         });
 
         this.transactionHistoryButton = Ext.create('Ext.Button', {
