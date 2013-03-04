@@ -18,7 +18,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             handler: this.selectActivity,
             scope: this,
             height: 80,
-            width: 80,
+            width: 120,
             text: 'Activity',
         });
 
@@ -26,7 +26,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             handler: this.selectAccount,
             scope: this,
             height: 80,
-            width: 80,
+            width: 120,
             text: 'Account',
         });
 
@@ -34,7 +34,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             handler: this.selectTransactionHistory,
             scope: this,
             height: 80,
-            width: 80,
+            width: 120,
             text: 'History',
         });
 

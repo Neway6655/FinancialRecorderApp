@@ -27,6 +27,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 			xtype: 'textfield',
 			name : 'name',
 			label: 'Name',
+			value: Ext.Date.format(new Date(),'n/j/Y')
 		});
 
 		this.totalFeeField =  Ext.create('Ext.field.Number',{

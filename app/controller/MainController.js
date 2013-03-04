@@ -67,6 +67,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           },
           failure: function(response,options){
             console.log("Login Failed.");
+            Ext.Viewport.setMasked(false);
             Ext.Msg.alert('Error', 'User name or password not correct, please try again.', Ext.emptyFn);
           }
         });
