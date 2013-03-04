@@ -56,7 +56,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
                 pack:'center'
             },
             height: '100%',
-            padding: '50',
+            padding: '10',
             cls: 'home_panel',
 
             items: [
@@ -72,7 +72,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
                 pack:'center'
             },
             height: '100%',
-            padding: '50',
+            padding: '10',
             cls: 'home_panel',
 
             items: [
