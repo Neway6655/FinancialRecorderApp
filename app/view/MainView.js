@@ -1,6 +1,7 @@
 Ext.define('FinancialRecorderApp.view.MainView', {
     extend: 'Ext.Panel',
     xtype: 'mainview',
+    id: 'mainViewId',
 
     layout: {
         type: 'fit',
@@ -10,21 +11,31 @@ Ext.define('FinancialRecorderApp.view.MainView', {
 
     accountButton: '',
 
+    transactionHistoryButton: '',
+
     initialize: function() {
         this.activityButton = Ext.create('Ext.Button', {
             handler: this.selectActivity,
             scope: this,
             height: 80,
-            width: 80,
-            icon: 'resources/images/activities.png',
+            width: 120,
+            text: 'Activity',
         });
 
         this.accountButton = Ext.create('Ext.Button', {
             handler: this.selectAccount,
             scope: this,
             height: 80,
-            width: 80,
-            icon: 'resources/images/accounts.png',
+            width: 120,
+            text: 'Account',
+        });
+
+        this.transactionHistoryButton = Ext.create('Ext.Button', {
+            handler: this.selectTransactionHistory,
+            scope: this,
+            height: 80,
+            width: 120,
+            text: 'History',
         });
 
         var topBar = {
@@ -37,7 +48,7 @@ Ext.define('FinancialRecorderApp.view.MainView', {
             xtype: 'spacer',
         };
 
-        var centerPanel = {
+        var upPanel = {
             xtype: 'panel',
             layout: {
                 type: 'hbox',
@@ -45,15 +56,31 @@ Ext.define('FinancialRecorderApp.view.MainView', {
                 pack:'center'
             },
             height: '100%',
-            padding: '50',
+            padding: '10',
             cls: 'home_panel',
 
             items: [
                 this.activityButton, spacer, this.accountButton
             ]
-        }
+        };
 
-        this.add(topBar, centerPanel);
+        var downPanel = {
+            xtype: 'panel',
+            layout: {
+                type: 'hbox',
+                align:'center',
+                pack:'center'
+            },
+            height: '100%',
+            padding: '10',
+            cls: 'home_panel',
+
+            items: [
+                this.transactionHistoryButton, spacer, spacer
+            ]
+        };
+
+        this.add(topBar, upPanel, downPanel);
     },
 
     selectActivity: function() {
@@ -64,5 +91,10 @@ Ext.define('FinancialRecorderApp.view.MainView', {
     selectAccount: function(){
         console.log('account button tapped.');
         this.fireEvent('selectAccountEvent', this);
+    },
+
+    selectTransactionHistory: function(){
+        console.log('transaction history button tapped.');
+        this.fireEvent('selectTransactionHistoryEvent', this);  
     }
 });

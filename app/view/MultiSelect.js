@@ -12,7 +12,7 @@ Ext.define('FinancialRecorderApp.view.MultiSelect', {
                 modal: true,
                 cls: Ext.baseCSSPrefix + 'select-overlay',
                 layout: 'fit',
-                height: '80%',
+                height: '90%',
                 weight: '50%',
                 hideOnMaskTap: true,
                 items: {
@@ -31,7 +31,7 @@ Ext.define('FinancialRecorderApp.view.MultiSelect', {
                         xtype: 'button',
                         text: 'Done',
                         ui: 'action',
-                        height: '15px',
+                        height: '10px',
                         width: '40%',
                         docked: 'bottom',
                         style: 'margin-top: 10px; margin-bottom: 10px; margin-left: auto; margin-right: auto;',
