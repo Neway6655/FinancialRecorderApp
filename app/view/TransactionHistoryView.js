@@ -30,7 +30,7 @@ Ext.define('FinancialRecorderApp.view.TransactionHistoryView', {
             loadingText: "Loading Transaction History",
             emptyText: '<div><p>No Transaction Found.</div>',
             itemTpl:
-                    '{type}, created at {createdTime}---' + 
+                    '{type}, created at {createdTime}, ' + 
                     '<small>Amount: {amount}</small>',
             store: Ext.create("FinancialRecorderApp.store.TransactionHistoryStore"),
         });

@@ -8,6 +8,10 @@ Ext.define('FinancialRecorderApp.store.UserStore',{
 	
 	config: {
 		autoLoad: true,
+		sorters: [{
+	        property: 'name',
+	        direction: 'ASCE'
+    	}],
 		storeId: 'UserStore',
 		model: 'FinancialRecorderApp.model.UserModel',
 		proxy: {
