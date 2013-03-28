@@ -62,6 +62,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
           jsonData: loginRequestJson,
           success: function(response, options) {
             FinancialRecorderApp.app.setCurrentUser(response.responseText);
+            window.plugins.GCM.register("116491689837", "GCM_Event", GCM_Success, GCM_Fail);
             Ext.Viewport.setMasked(false);
             Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
           },
