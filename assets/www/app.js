@@ -16,8 +16,8 @@ Ext.application({
 
     currentUser: '',
 
-    setCurrentUser: function(userName){
-        this.currentUser = userName;
+    setCurrentUser: function(user){
+        this.currentUser = user;
     },
 
     getCurrentUser: function(){

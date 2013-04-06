@@ -56,15 +56,26 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var loginRequestJson = '{"userName": "'+ loginFormValue.userName +'", "password": "'+ loginFormValue.password +'"}';
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.Ajax.request({
-//          url: 'http://localhost:8080/recorder-server/api/user/login',
-           url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
+         url: 'http://localhost:8080/recorder-server/api/user/login',
+           // url: 'http://financialrecorder.cloudfoundry.com/api/user/login',
           method: 'POST',
           jsonData: loginRequestJson,
           success: function(response, options) {
-            FinancialRecorderApp.app.setCurrentUser(response.responseText);
-            window.plugins.GCM.register("116491689837", "GCM_Event", GCM_Success, GCM_Fail);
-            Ext.Viewport.setMasked(false);
-            Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
+            // FinancialRecorderApp.app.setCurrentUser(response.responseText);
+            Ext.getStore('UserStore').load(function(records, operation, success){
+              var currentUserName = response.responseText;
+              var index;
+              for(index = 0; index < records.length; index ++){
+                if (currentUserName === records[index].data.name){
+                  break;
+                }
+              }
+              var currentUser = records[index];
+              FinancialRecorderApp.app.setCurrentUser(currentUser);
+              Ext.Viewport.setMasked(false);
+              Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
+            }, this);
+            // window.plugins.GCM.register("116491689837", "GCM_Event", GCM_Success, GCM_Fail);
           },
           failure: function(response,options){
             console.log("Login Failed.");
@@ -80,15 +91,26 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
       var registerRequestJson = '{"userName": "'+ signupFormValue.userName +'", "password": "'+ signupFormValue.password +'"}';
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       Ext.Ajax.request({
-//          url: 'http://localhost:8080/recorder-server/api/user/register',
-          url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
+         url: 'http://localhost:8080/recorder-server/api/user/register',
+          // url: 'http://financialrecorder.cloudfoundry.com/api/user/register',
           method: 'POST',
           jsonData: registerRequestJson,
           success: function(response, options) {
             console.log("Sign up Successful, user: " + response.responseText);
-            FinancialRecorderApp.app.setCurrentUser(response.responseText);
-            Ext.Viewport.setMasked(false);
-            Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
+            Ext.getStore('UserStore').load(function(records, operation, success){
+              var currentUserName = response.responseText;
+              var index;
+              for(index = 0; index < records.length; index ++){
+                if (currentUserName === records[index].data.name){
+                  break;
+                }
+              }
+              var currentUser = records[index];
+              FinancialRecorderApp.app.setCurrentUser(currentUser);
+              Ext.Viewport.setMasked(false);
+              Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
+            }, this);
+            // window.plugins.GCM.register("116491689837", "GCM_Event", GCM_Success, GCM_Fail);
           },
           failure: function(response,options){
             console.log("Sign up Failed.");
@@ -100,18 +122,9 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     selectActivity: function(){
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
-      Ext.getStore('UserStore').load(function(records, operation, success){
-        var currentUserName = FinancialRecorderApp.app.getCurrentUser();   
-        var index;
-        for(index = 0; index < records.length; index ++){
-          if (currentUserName === records[index].data.name){
-            break;
-          }
-        }
-        var currentUser = records[index];
-        Ext.Viewport.setMasked(false);
-        this.showActivityView(currentUser.data.type);
-      }, this);
+      var currentUser = FinancialRecorderApp.app.getCurrentUser();
+      Ext.Viewport.setMasked(false);
+      this.showActivityView(currentUser.data.type);
     },
 
     showActivityView: function(userType){
@@ -120,7 +133,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
         // if normal user, only show the related activities.
         this.getActivityView().getNewButton().hide();
         // recorderStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/user/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
-        recorderStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/user/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+        recorderStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/user/search?userName=' + FinancialRecorderApp.app.getCurrentUser().data.name);
         recorderStore.load(function(records, operation, success){
           Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideLeftTransition);
         }, this);
@@ -134,31 +147,23 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
 
     selectAccount: function(){
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
-      Ext.getStore('UserStore').load(function(records, operation, success){
-        var currentUserName = FinancialRecorderApp.app.getCurrentUser();   
-        var index;
-        for(index = 0; index < records.length; index ++){
-          if (currentUserName === records[index].data.name){
-            break;
-          }
-        }
-        var currentUser = records[index];
-        Ext.Viewport.setMasked(false);
-        if (currentUser.data.type === 2){
+      var currentUser = FinancialRecorderApp.app.getCurrentUser();
+      if (currentUser.data.type === 2){
           // normal user.
           this.getAccountDetailView().loadFormRecord(currentUser);
           Ext.Viewport.animateActiveItem(this.getAccountDetailView(), this.slideLeftTransition);
-        }else {
+      }else {
           // administrator.
           Ext.Viewport.animateActiveItem(this.getAccountView(), this.slideLeftTransition);
-        }
-      }, this);
+      }
+      Ext.Viewport.setMasked(false);
+
     },
 
     selectTransactionHistory: function(){
       var transactionHistoryStore = this.getTransactionHistoryView().getTransactionHistoryList().getStore();
-      transactionHistoryStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
-      // transactionHistoryStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser());
+      transactionHistoryStore.getProxy().setUrl('http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser().data.name);
+      // transactionHistoryStore.getProxy().setUrl('http://localhost:8080/recorder-server/api/jsonp/finance/search?userName=' + FinancialRecorderApp.app.getCurrentUser().data.name);
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading...'});
       transactionHistoryStore.load(function(records, operation, success){
         Ext.Viewport.setMasked(false);
@@ -169,4 +174,5 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
     backToMainView: function(){
       Ext.Viewport.animateActiveItem(this.getMainView(), this.slideRightTransition);
     },
+
 });

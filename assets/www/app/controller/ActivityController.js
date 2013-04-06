@@ -42,11 +42,24 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
           this.activityDetail = Ext.create('FinancialRecorderApp.view.ActivityDetail');
         }
 
+        Ext.getStore('UserStore').load(function(records, operation, success){
+          var currentUserName = FinancialRecorderApp.app.getCurrentUser();   
+          var index;
+          for(index = 0; index < records.length; index ++){
+            if (currentUserName === records[index].data.name){
+              break;
+            }
+          }
+          var currentUser = records[index];
+        }, this);
+
         this.getActivityDetailView().nameField.setReadOnly(false);
         this.getActivityDetailView().totalFeeField.setReadOnly(false);
         this.getActivityDetailView().attendUserField.setReadOnly(false);
         this.getActivityDetailView().attendUserField.setValue('');
         this.getActivityDetailView().getSaveButton().show();
+        this.getActivityDetailView().getJoinButton().hide();
+        this.getActivityDetailView().getFinishButton().hide();
         this.getActivityDetailView().getForm().reset();
         Ext.Viewport.animateActiveItem(this.getActivityDetailView(), this.slideLeftTransition);
     },
@@ -59,6 +72,12 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         this.getActivityDetailView().getActivityDate().setValue(new Date(record.data.recordDate));
 
         this.getActivityDetailView().getSaveButton().hide();
+        if (FinancialRecorderApp.app.getCurrentUser().data.type == 1){
+          this.getActivityDetailView().getFinishButton().show();
+        }else{
+          this.getActivityDetailView().getFinishButton().hide();
+        }
+        this.getActivityDetailView().getJoinButton().show();
         Ext.Viewport.animateActiveItem(this.getActivityDetailView(), this.slideLeftTransition);
     },
 

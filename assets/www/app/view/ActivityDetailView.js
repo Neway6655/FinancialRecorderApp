@@ -20,6 +20,10 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
     saveButton: '',
 
+    joinButton: '',
+
+    finishButton: '',
+
 	initialize: function() {
 		console.log('init activity detail view.');
 
@@ -53,6 +57,40 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
             usePicker : false
 		});
 
+		this.joinButton = Ext.create('Ext.Button', {
+			xtype: 'button',
+    		align: 'left',
+    		text: 'Join',
+    		width: 120,
+    		handler: this.join,
+    		scope: this
+		});
+
+		this.finishButton = Ext.create('Ext.Button', {
+			xtype: 'button',
+    		align: 'middle',
+    		text: 'Finish',
+    		width: 120,
+    		ui: 'confirm',
+    		handler: this.finish,
+    		scope: this
+		});
+
+		var buttonPanel = {
+            xtype: 'panel',
+            layout: {
+                type: 'hbox',
+                align:'center',
+                pack:'center'
+            },
+            height: '100%',
+            padding: '10',
+
+            items: [
+                this.joinButton, this.finishButton
+            ]
+        };
+
 		this.formPanel = Ext.create('Ext.form.Panel',{
 			items: [{
 				xtype: 'fieldset',
@@ -63,7 +101,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 					labelWidth: '35%'
 				},
 				items: [
-					this.nameField, this.activityDate, this.totalFeeField, this.attendUserField
+					this.nameField, this.activityDate, this.totalFeeField, this.attendUserField, buttonPanel
 				],
 			}]
 		});
@@ -110,6 +148,15 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 		this.fireEvent('saveActivityEvent', this);
 	},
 
+	join: function(){
+		console.log('join the activity.');
+		// this.fireEvent('joinActivityEvent', this);
+	},
+
+	finish: function(){
+		console.log('finish the activity.');
+	},
+
 	getForm: function(){
 		return this.formPanel;
 	},
@@ -120,5 +167,13 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
 	getSaveButton: function(){
 		return this.saveButton;
+	},
+
+	getJoinButton: function(){
+		return this.joinButton;
+	},
+
+	getFinishButton: function(){
+		return this.finishButton;
 	}
 });
