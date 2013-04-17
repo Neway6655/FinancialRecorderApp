@@ -102,7 +102,7 @@ Ext.define('FinancialRecorderApp.view.MultiSelect', {
                 list = listPanel.down('list'),
                 store = list.getStore(),
                 itemStringArray = new Array(),
-                values = (this.getValue() instanceof Ext.data.Model ? '':this.getValue().split(',')),
+                values = this.getValue() instanceof Ext.data.Model ? '':this.getValue()=='' ? new Array():this.getValue(),
                 v = 0,
                 vNum = values.length;
             if (!listPanel.getParent()) {

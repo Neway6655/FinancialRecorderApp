@@ -15,7 +15,7 @@ Ext.define('FinancialRecorderApp.store.RecorderStore',{
 		model: 'FinancialRecorderApp.model.RecorderModel',
 		proxy: {
 			type: 'jsonp',
-			url : 'http://financialrecorder.cloudfoundry.com/api/jsonp/finance/list',
+			url : 'http://financialrecorder.cloudfoundry.com/api/jsonp/finance/list/1',
 			reader: {
 				type: 'json',
 				rootProperty: 'recordList'

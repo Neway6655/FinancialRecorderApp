@@ -22,6 +22,8 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
     joinButton: '',
 
+    joinOnBehalfOfButton: '',
+
     finishButton: '',
 
 	initialize: function() {
@@ -38,6 +40,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 			xtype: 'numberfield',
 			name : 'totalFee',
 			label: 'Total Fee',
+			value: 0
 		});
 
 		this.activityDate = Ext.create('Ext.field.DatePicker',{
@@ -61,16 +64,25 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 			xtype: 'button',
     		align: 'left',
     		text: 'Join',
-    		width: 120,
+    		width: 70,
     		handler: this.join,
+    		scope: this
+		});
+
+		this.joinOnBehalfOfButton = Ext.create('Ext.Button', {
+			xtype: 'button',
+    		align: 'middle',
+    		text: 'JoinOnBehalfOf',
+    		width: 70,
+    		handler: this.joinOnBehalfOf,
     		scope: this
 		});
 
 		this.finishButton = Ext.create('Ext.Button', {
 			xtype: 'button',
-    		align: 'middle',
+    		align: 'right',
     		text: 'Finish',
-    		width: 120,
+    		width: 70,
     		ui: 'confirm',
     		handler: this.finish,
     		scope: this
@@ -87,7 +99,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
             padding: '10',
 
             items: [
-                this.joinButton, this.finishButton
+                this.joinButton, this.joinOnBehalfOfButton, this.finishButton
             ]
         };
 
@@ -150,11 +162,17 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
 	join: function(){
 		console.log('join the activity.');
-		// this.fireEvent('joinActivityEvent', this);
+		this.fireEvent('joinActivityEvent', this);
+	},
+
+	joinOnBehalfOf: function(){
+		console.log('join on behalf of.')
+		this.fireEvent('joinOnBehalfOfActivityEvent', this);
 	},
 
 	finish: function(){
 		console.log('finish the activity.');
+		this.fireEvent('finishActivityEvent', this);
 	},
 
 	getForm: function(){
@@ -171,6 +189,10 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
 	getJoinButton: function(){
 		return this.joinButton;
+	},
+
+	getJoinOnBehalfOfButton: function(){
+		return this.joinOnBehalfOfButton;
 	},
 
 	getFinishButton: function(){
