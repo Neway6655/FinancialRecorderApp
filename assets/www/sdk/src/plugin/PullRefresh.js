@@ -214,6 +214,7 @@ Ext.define('Ext.plugin.PullRefresh', {
         }
 
         store.insert(0, toInsert);
+        this.getList().refresh();
     },
 
     onPainted: function() {

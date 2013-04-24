@@ -12,7 +12,7 @@ GCM_Event(e)
     gApp.gcmregid = e.regid;
     if ( gApp.gcmregid.length > 0 )
     {
-      var deviceRegRequestJson = '{"userName": "' + FinancialRecorderApp.app.getCurrentUser() + '", "deviceRegId": "'+ e.regid +'"}';
+      var deviceRegRequestJson = '{"userName": "' + FinancialRecorderApp.app.getCurrentUser().data.name + '", "deviceRegId": "'+ e.regid +'"}';
       Ext.Ajax.request({
           url: 'http://financialrecorder.cloudfoundry.com/api/device/register',
           method: 'POST',

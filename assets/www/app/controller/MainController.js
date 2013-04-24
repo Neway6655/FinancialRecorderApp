@@ -71,6 +71,7 @@ Ext.define('FinancialRecorderApp.controller.MainController', {
               }
               var currentUser = records[index];
               FinancialRecorderApp.app.setCurrentUser(currentUser);
+              console.log('User: ' + currentUser.data.name + ' logined.');
               Ext.Viewport.setMasked(false);
               Ext.Viewport.animateActiveItem(Ext.getCmp('mainViewId'), { type: 'slide', direction: 'left' });
             }, this);

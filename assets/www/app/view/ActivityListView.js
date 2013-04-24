@@ -1,6 +1,6 @@
 Ext.define('FinancialRecorderApp.view.ActivityListView', {
     extend: 'Ext.List',
-    xtype: 'activitylistview',    
+    xtype: 'activitylistview', 
 	requires: ['FinancialRecorderApp.store.RecorderStore'],
     
     config: {
