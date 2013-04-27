@@ -54,6 +54,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         this.getActivityDetailView().getSaveButton().show();
         this.getActivityDetailView().getJoinButton().hide();
         this.getActivityDetailView().getFinishButton().hide();
+        this.getActivityDetailView().getJoinOnBehalfOfButton().hide();
         Ext.Viewport.animateActiveItem(this.getActivityDetailView(), this.slideLeftTransition);
     },
 
@@ -176,11 +177,15 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
     finishActivity: function() {
         var activityDetail = this.getActivityDetailView().getForm();
         var financialRecord = activityDetail.getRecord();
+
+        var finishFinancialRecordJson = '{"financialRecordId": '+ financialRecord.data.id +', "totalFee": '+ activityDetail.getValues().totalFee +'}';
+        console.log('post update financial record json: ' + finishFinancialRecordJson);
         Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);
 
         Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/finance/update/' + financialRecord.data.id,
-          method: 'GET',
+          url: 'http://financialrecorder.cloudfoundry.com/api/finance/update',
+          method: 'POST',
+          jsonData: finishFinancialRecordJson,
           success: function(response, options) {
             console.log("Successfully finish activity.");
             Ext.Msg.alert('Successful', 'Successfully finish activity.', Ext.emptyFn);
