@@ -102,7 +102,7 @@ Ext.define('FinancialRecorderApp.view.MultiSelect', {
                 list = listPanel.down('list'),
                 store = list.getStore(),
                 itemStringArray = new Array(),
-                values = this.getValue() instanceof Ext.data.Model ? '':this.getValue()=='' ? new Array():this.getValue(),
+                values = this.getValue() instanceof Ext.data.Model ? '':this.getValue()=='' ? new Array():this.getValue().split(','),
                 v = 0,
                 vNum = values.length;
             if (!listPanel.getParent()) {
@@ -135,6 +135,7 @@ Ext.define('FinancialRecorderApp.view.MultiSelect', {
             out  : true,
             scope: this
         });
+        this.fireEvent('updateUsers', this);
     },
 
     onListHide: function(cmp, opts) {
@@ -150,7 +151,7 @@ Ext.define('FinancialRecorderApp.view.MultiSelect', {
             me.setValue(itemStringArray.join(','));
             this.listPanel.down('list').deselectAll();
         } else {
-            me.setValue('None');
+            me.setValue('');
         }
     }
 });

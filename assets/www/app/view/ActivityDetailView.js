@@ -18,6 +18,8 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
     attendUserField: '',
 
+    attendUserAreaField: '',
+
     saveButton: '',
 
     joinButton: '',
@@ -57,7 +59,19 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
             store : Ext.create("FinancialRecorderApp.store.UserStore"),
             displayField : 'name',
             valueField : 'name',
-            usePicker : false
+            usePicker : false,
+            listeners: {
+                updateUsers: this.onAttendUserUpdate,
+                scope: this
+            }
+		});
+
+		this.attendUserAreaField = Ext.create('Ext.field.TextArea', {
+			xtype: 'textareafield',
+			name: 'attendUsers',
+			label: 'Attended Members',
+			maxHeight: '300px',
+			readOnly: true,
 		});
 
 		this.joinButton = Ext.create('Ext.Button', {
@@ -113,7 +127,7 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 					labelWidth: '35%'
 				},
 				items: [
-					this.nameField, this.activityDate, this.totalFeeField, this.attendUserField, buttonPanel
+					this.nameField, this.activityDate, this.totalFeeField, this.attendUserField, this.attendUserAreaField, buttonPanel
 				],
 			}]
 		});
@@ -141,6 +155,10 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
     	};
 
 		this.add(topBar, this.formPanel);
+	},
+
+	onAttendUserUpdate: function() {
+		this.attendUserAreaField.setValue(this.formPanel.getValues().userNameList);
 	},
 
 	loadRecord: function(record){
@@ -181,6 +199,14 @@ Ext.define('FinancialRecorderApp.view.ActivityDetailView', {
 
 	getActivityDate: function(){
 		return this.activityDate;
+	},
+
+	getUserField: function(){
+		return this.attendUserField;
+	},
+
+	getAttendUserAreaField: function() {
+		return this.attendUserAreaField;
 	},
 
 	getSaveButton: function(){

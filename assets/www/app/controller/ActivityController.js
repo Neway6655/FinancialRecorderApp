@@ -64,6 +64,10 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         }
         this.getActivityDetailView().loadRecord(record);
         this.getActivityDetailView().getActivityDate().setValue(new Date(record.data.recordDate));
+        if (record.data.userNameList != ''){
+          this.getActivityDetailView().getUserField().setValue(record.data.userNameList.join(','));
+          this.getActivityDetailView().getAttendUserAreaField().setValue(record.data.userNameList);
+        }
 
         this.getActivityDetailView().getSaveButton().hide();
         if (FinancialRecorderApp.app.getCurrentUser().data.type == 1){
