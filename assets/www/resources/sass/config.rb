@@ -10,7 +10,9 @@ css_path = File.join(dir, "..", "css")
 
 # Require any additional compass plugins here.
 # images_dir = File.join(dir, "..", "themes", "images")
-images_dir = "../images"
+relative_assets = true
+images_dir = "../images/"
+fonts_dir = "../fonts/"
 
 output_style = :compressed
 environment = :production

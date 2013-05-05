@@ -6,7 +6,7 @@
     $alert-color: #B0886D;
     $neutral-color: $base-color;
     $active-color: darken($base-color, 10%);
-    
+
     // GRADIENTS
     $base-gradient: 'matte';
     
@@ -72,7 +72,7 @@
 	}
 	
 	.tweet-wrapper {
-	  h2 { font-weight: bold; padding-bottom: 3px; }
+	  h2 { font-weight: blod; padding-bottom: 3px; }
 	  img { border-radius: 5px; float: left; }
 	  .tweet {
 	    font-size: 70%;
@@ -152,8 +152,21 @@
 	.x-toolbar .x-field-search .x-component-outer, .x-toolbar .x-field-select .x-component-outer, .x-toolbar .x-field-text .x-component-outer {
 		border: 1px solid darken($active-color, 10%);
 	}
-	
 
+	// LISTS
+	.x-list-label {
+		font-size: 0.8em;
+	}
+
+	.x-list-item-label {
+		font-size: 0.8em;
+	}
+
+	// TEXTAREA
+	.x-field-textarea {
+		font-size: 0.8em;
+	}
+	
 	// BUTTONS
 	.x-button {
 		&.x-button-pressing {
@@ -208,6 +221,7 @@
 		.x-button-label {
 			font-family: "NewRocker";
 			@include bevel-text('highlight');
+			font-weight: bold;
 		}
 		
 		&.x-button-plain{
@@ -222,4 +236,9 @@
 			width: 3em;
 			height: 4em;
 		}
+	}
+
+	// ALL
+	body.x-desktop {
+		font-size: 0.9em;
 	}
