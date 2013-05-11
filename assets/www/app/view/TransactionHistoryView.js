@@ -29,9 +29,15 @@ Ext.define('FinancialRecorderApp.view.TransactionHistoryView', {
             title: 'Transaction History',
             loadingText: "Loading Transaction History",
             emptyText: '<div><p>No Transaction Found.</div>',
-            itemTpl:
-                    '{type}, created at {createdTime}, ' + 
-                    '<small>Amount: {amount}</small>',
+            itemTpl: new Ext.XTemplate (
+                    '<p>Event: {type}, Date: {createdTime} </p>', 
+                    '<p>Amount:{[this.floatFormat(values.amount)]} </p>',
+                    {
+                        compiled: true,
+                        floatFormat: function (float){
+                            return (parseInt(float * 100))/100;
+                        }
+                    }),
             store: Ext.create("FinancialRecorderApp.store.TransactionHistoryStore"),
         });
 
