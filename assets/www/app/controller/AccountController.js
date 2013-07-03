@@ -50,7 +50,7 @@ Ext.define('FinancialRecorderApp.controller.AccountController', {
 
       Ext.Viewport.setMasked({xtype:'loadmask', message:'Wait...'});
       Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/finance/cashin',
+          url: 'http://financialrecorder.herokuapp.com/api/finance/cashin',
           // url: 'http://localhost:8080/recorder-server/api/finance/cashin',
           method: 'POST',
           jsonData: cashinRequestJson,

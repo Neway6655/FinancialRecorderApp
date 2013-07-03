@@ -16,7 +16,7 @@ Ext.define('FinancialRecorderApp.store.UserStore',{
 		model: 'FinancialRecorderApp.model.UserModel',
 		proxy: {
 			type: 'jsonp',
-			url : 'http://financialrecorder.cloudfoundry.com/api/jsonp/user/list',
+			url : 'http://financialrecorder.herokuapp.com/api/jsonp/user/list',
 			// url : 'http://localhost:8080/recorder-server/api/jsonp/user/list',
 			reader: {
 				type: 'json',

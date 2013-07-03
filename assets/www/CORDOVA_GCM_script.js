@@ -14,7 +14,7 @@ GCM_Event(e)
     {
       var deviceRegRequestJson = '{"userName": "' + FinancialRecorderApp.app.getCurrentUser().data.name + '", "deviceRegId": "'+ e.regid +'"}';
       Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/device/register',
+          url: 'http://financialrecorder.herokuapp.com/api/device/register',
           method: 'POST',
           jsonData: deviceRegRequestJson,
           success: function(response, options) {

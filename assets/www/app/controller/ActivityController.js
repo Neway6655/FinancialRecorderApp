@@ -109,7 +109,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);
 
         Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/finance/create',
+          url: 'http://financialrecorder.herokuapp.com/api/finance/create',
           method: 'POST',
           jsonData: financialRecordJson,
           success: function(response, options) {
@@ -133,7 +133,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);
 
         Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/finance/addUsers',
+          url: 'http://financialrecorder.herokuapp.com/api/finance/addUsers',
           method: 'POST',
           jsonData: addFinancialRecordUserJson,
           success: function(response, options) {
@@ -164,7 +164,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);
 
         Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/finance/addUsers',
+          url: 'http://financialrecorder.herokuapp.com/api/finance/addUsers',
           method: 'POST',
           jsonData: addFinancialRecordUserJson,
           success: function(response, options) {
@@ -187,7 +187,7 @@ Ext.define('FinancialRecorderApp.controller.ActivityController', {
         Ext.Viewport.animateActiveItem(this.getActivityView(), this.slideRightTransition);
 
         Ext.Ajax.request({
-          url: 'http://financialrecorder.cloudfoundry.com/api/finance/update',
+          url: 'http://financialrecorder.herokuapp.com/api/finance/update',
           method: 'POST',
           jsonData: finishFinancialRecordJson,
           success: function(response, options) {

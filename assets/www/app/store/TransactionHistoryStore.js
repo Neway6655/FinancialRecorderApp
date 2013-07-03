@@ -15,7 +15,7 @@ Ext.define('FinancialRecorderApp.store.TransactionHistoryStore',{
 		model: 'FinancialRecorderApp.model.TransactionHistoryModel',
 		proxy: {
 			type: 'jsonp',
-			url : 'http://financialrecorder.cloudfoundry.com/api/jsonp/finance/search',
+			url : 'http://financialrecorder.herokuapp.com/api/jsonp/finance/search',
 			reader: {
 				type: 'json',
 				rootProperty: 'budgetTrailList'
